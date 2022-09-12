@@ -3,4 +3,6 @@ from pyedo import edo
 import mediapipe as mp
 #open cv (computervision):
 import cv2 as cv
+#robot operating system:
+import roslibpy as ros
 myedo = edo("""ip for wifi""")

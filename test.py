@@ -5,4 +5,6 @@ import mediapipe as mp
 import cv2 as cv
 #Robot Operating System:
 import roslibpy as ros
+#pynput
+from pynput import pyn 
 myedo = edo("""ip for wifi""")

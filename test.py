@@ -24,4 +24,5 @@ def StartUp(myedo):
     myedo.moveJoints(-45, -45, 96, 17, 100, -11)
 
 
+
 print(StartUp(myedo))

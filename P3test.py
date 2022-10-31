@@ -19,7 +19,7 @@ myedo = edo('192.168.12.1')
 
 
 def StartUp(myedo):
-    myedo.init6Axes()
+    myedo.init7Axes()
     myedo.disengageStd()
     myedo.moveJoints(-45, -45, 96, 17, 100, -11)
 

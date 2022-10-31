@@ -7,4 +7,4 @@ import cv2 as cv
 import roslibpy as ros
 #pynput
 import pynput as pyn 
-myedo = edo("""ip for wifi""")
+myedo = edo("10.42.0.49")

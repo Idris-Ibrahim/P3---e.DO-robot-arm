@@ -7,4 +7,21 @@ import cv2 as cv
 import roslibpy as ros
 #pynput
 import pynput as pyn 
-myedo = edo("10.42.0.49")
+#pynput
+
+import time
+import math
+from pyedo import edo
+
+import unittest
+
+myedo = edo('192.168.12.1')
+
+
+def StartUp(myedo):
+    myedo.init6Axes()
+    myedo.disengageStd()
+    myedo.moveJoints(-45, -45, 96, 17, 100, -11)
+
+
+print(StartUp(myedo))

@@ -29,6 +29,7 @@ def DefineItems():
     for i in range (0,len(ItemList)):
 
         print(f"Item {i}:", ItemList[i].x, ItemList[i].y, ItemList[i].z)
+        print(f"Item {i} volume: {ItemList[i].x * ItemList[i].y * ItemList[i].z }")
 
 #Run function:
 DefineItems()

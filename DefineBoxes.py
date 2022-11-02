@@ -29,6 +29,7 @@ def DefineBoxes():
     for i in range (0,len(BoxList)):
 
         print(f"Box {i}:", BoxList[i].x, BoxList[i].y, BoxList[i].z)
+        print(f"Box {i} volume: {BoxList[i].x * BoxList[i].y * BoxList[i].z }")
 
 #Run function:
 DefineBoxes()

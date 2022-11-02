@@ -8,6 +8,7 @@ def DefineItems():
             self.x = x
             self.y = y
             self.z = z
+            self.volume = self.x * self.y * self.z
 
     #Amount of item types:
     ItemAmount = int(input("Amount of item types: "))
@@ -29,7 +30,7 @@ def DefineItems():
     for i in range (0,len(ItemList)):
 
         print(f"Item {i}:", ItemList[i].x, ItemList[i].y, ItemList[i].z)
-        print(f"Item {i} volume: {ItemList[i].x * ItemList[i].y * ItemList[i].z }")
+        print(f"Item {i} volume: {ItemList[i].volume}")
 
 #Run function:
 DefineItems()

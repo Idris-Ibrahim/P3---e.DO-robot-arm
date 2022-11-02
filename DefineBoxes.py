@@ -8,6 +8,7 @@ def DefineBoxes():
             self.x = x
             self.y = y
             self.z = z
+            self.volume = self.x * self.y * self.z
 
     #Amount of box types:
     BoxAmount = int(input("Amount of box types: "))
@@ -29,7 +30,7 @@ def DefineBoxes():
     for i in range (0,len(BoxList)):
 
         print(f"Box {i}:", BoxList[i].x, BoxList[i].y, BoxList[i].z)
-        print(f"Box {i} volume: {BoxList[i].x * BoxList[i].y * BoxList[i].z }")
+        print(f"Box {i} volume: {BoxList[i].volume}")
 
 #Run function:
 DefineBoxes()

@@ -10,14 +10,14 @@ def DefineBoxes():
             self.z = z
 
     #Amount of box types:
-    BoxAmount = int(input("Amount box types: "))
+    BoxAmount = int(input("Amount of box types: "))
 
-    #insert mesurement for each axes for each box:
+    #insert measurement for each axes for each box:
     i = 0
     while BoxAmount > 0 :
-        x = input(f"Box {i} x length: ")
-        y = input(f"Box {i} y length: ")
-        z = input(f"Box {i} z length: ")
+        x = float(input(f"Box {i} x length: "))
+        y = float(input(f"Box {i} y length: "))
+        z = float(input(f"Box {i} z length: "))
 
         BoxList.append(Box(x, y, z))
 
@@ -25,7 +25,10 @@ def DefineBoxes():
         BoxAmount -= 1
         print("\n")
     
-    #print all the boxes and the mesurements:
+    #print all the boxes and the measurement:
     for i in range (0,len(BoxList)):
 
-        print(f"Box type {i}:", BoxList[i].x, BoxList[i].y, BoxList[i].z)
+        print(f"Box {i}:", BoxList[i].x, BoxList[i].y, BoxList[i].z)
+
+#Run function:
+DefineBoxes()

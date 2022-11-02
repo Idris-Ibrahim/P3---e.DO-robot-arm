@@ -1,6 +1,7 @@
+#Function definiton:
 def DefineBoxes():
 
-    #defining the list of boxes and the objekt for a box
+    #Defining the list of boxes and the objekt for a box
     BoxList = []
 
     class Box:
@@ -13,7 +14,7 @@ def DefineBoxes():
     #Amount of box types:
     BoxAmount = int(input("Amount of box types: "))
 
-    #insert measurement for each axes for each box:
+    #Insert measurement for each axes for each box:
     i = 0
     while BoxAmount > 0 :
         x = float(input(f"Box {i} x length: "))
@@ -26,11 +27,11 @@ def DefineBoxes():
         BoxAmount -= 1
         print("\n")
     
+    #Sorting all boxes from smallest to biggest volume
+    BoxList = sorted(BoxList, key=lambda Box: Box.volume)
+
     #print all the boxes and the measurement:
     for i in range (0,len(BoxList)):
 
-        print(f"Box {i}:", BoxList[i].x, BoxList[i].y, BoxList[i].z)
-        print(f"Box {i} volume: {BoxList[i].volume}")
-
-#Run function:
-DefineBoxes()
+        print(f"Box {i} measurements:", BoxList[i].x, BoxList[i].y, BoxList[i].z)
+        print(f"Box {i} volume: {BoxList[i].volume}\n")

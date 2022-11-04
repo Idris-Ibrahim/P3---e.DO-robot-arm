@@ -1,8 +1,5 @@
 #Function definiton:
-def DefineBoxes():
-
-    #Defining the list of boxes and the objekt for a box
-    BoxList = []
+def DefineBoxes(BoxList):
 
     class Box:
         def __init__(self, x, y, z):

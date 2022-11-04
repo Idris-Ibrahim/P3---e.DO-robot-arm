@@ -1,8 +1,5 @@
 #Function definiton:
-def DefineItems():
-
-    #Defining the list of items and the objekt for an item
-    ItemList = []
+def DefineItems(ItemList):
 
     class Item:
         def __init__(self, x, y, z):

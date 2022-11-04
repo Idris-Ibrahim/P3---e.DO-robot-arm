@@ -14,7 +14,7 @@ print("Itemlist Length:", len(ItemList), "Boxlist Length:", len(BoxList))
 j = 0
 i = 0
 
-if ItemList[j].volume > BoxList[i].volume:
+if ItemList[j].volume < BoxList[i].volume:
     for i in range(0,len(BoxList)):
         for j in range(0, len(ItemList)):
             #list of calculations:
@@ -48,4 +48,4 @@ if ItemList[j].volume > BoxList[i].volume:
 
             
 else :
-    print("yes")
+    print("nein")

@@ -118,7 +118,7 @@ def run_demo():
 		device_manager.enable_emitter(True)
 
 		# Load the JSON settings file in order to enable High Accuracy preset for the realsense
-		device_manager.load_settings_json("./HighResHighAccuracyPreset.json")
+		device_manager.load_settings_json('C:/Users/caspe/OneDrive/Desktop/Github/P3-e.DO-robot-arm/openCV/box_dimensioner_multicam/HighResHighAccuracyPreset.json')
 
 		# Get the extrinsics of the device to be used later
 		extrinsics_devices = device_manager.get_depth_to_color_extrinsics(frames)

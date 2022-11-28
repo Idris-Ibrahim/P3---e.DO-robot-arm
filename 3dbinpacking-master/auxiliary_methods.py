@@ -1,5 +1,5 @@
 from decimal import Decimal
-from .constants import Axis
+from constants import Axis
 
 
 def rect_intersect(item1, item2, x, y):

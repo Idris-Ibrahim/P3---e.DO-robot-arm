@@ -1,4 +1,4 @@
-from py3dbp import Packer, Bin, Item
+from main import Packer, Bin, Item
 
 packer = Packer()
 

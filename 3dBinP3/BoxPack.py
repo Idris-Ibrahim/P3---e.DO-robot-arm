@@ -12,10 +12,6 @@ print("Itemlist Length:", len(ItemList), "Boxlist Length:", len(BoxList))
 
 #først sammenligner vi item[0] volume og ser om det er mindre en box[0] volume
 
-j = 0
-i = 0
-
-
 for i in range(0,len(BoxList)):
     for j in range(0, len(ItemList)):
         #list of calculations:

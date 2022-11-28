@@ -39,7 +39,7 @@ def run_demo():
 	
 	chessboard_width = 6 # squares
 	chessboard_height = 9 	# squares
-	square_size = 0.0253 # meters
+	square_size = 0.02 # meters
 
 	try:
 		# Enable the streams from all the intel realsense devices

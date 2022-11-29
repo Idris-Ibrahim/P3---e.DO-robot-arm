@@ -1,6 +1,7 @@
 import cv2
 from object_detector import *
 import numpy as np
+import pyrealsense2
 
 # Load Aruco detector
 parameters = cv2.aruco.DetectorParameters_create()
@@ -11,9 +12,9 @@ aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
 detector = HomogeneousBgDetector()
 
 # Load Cap
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+cap = cv2.VideoCapture(1)
+ret, frame = cap.read()
 
 while True:
     _, img = cap.read()

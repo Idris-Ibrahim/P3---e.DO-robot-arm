@@ -7,13 +7,16 @@ def DefineItems(ItemList):
             self.y = y
             self.z = z
             self.volume = self.x * self.y * self.z
+        
+        class Rotation : 
+            xyz = 0
+               
 
     #Amount of item types:
-    ItemAmount = int(input("Amount of item types: "))
+    ItemTypeAmount = int(input("Amount of item types: "))
 
     #Insert measurement for each axes for each item:
-    i = 0
-    while ItemAmount > 0 :
+    for i in range(ItemTypeAmount) :
         x = float(input(f"Item {i} x length: "))
         y = float(input(f"Item {i} y length: "))
         z = float(input(f"Item {i} z length: "))

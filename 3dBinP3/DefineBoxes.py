@@ -9,11 +9,10 @@ def DefineBoxes(BoxList):
             self.volume = self.x * self.y * self.z
 
     #Amount of box types:
-    BoxAmount = int(input("Amount of box types: "))
+    BoxTypeAmount = int(input("Amount of box types: "))
 
     #Insert measurement for each axes for each box:
-    i = 0
-    while BoxAmount > 0 :
+    for i in range(BoxTypeAmount) :
         x = float(input(f"Box {i} x length: "))
         y = float(input(f"Box {i} y length: "))
         z = float(input(f"Box {i} z length: "))

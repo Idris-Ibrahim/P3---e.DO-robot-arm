@@ -19,8 +19,6 @@ def DefineBoxes(BoxList):
 
         BoxList.append(Box(x, y, z))
 
-        i += 1
-        BoxAmount -= 1
         print("\n")
     
     #Sorting all boxes from smallest to biggest volume

@@ -1,30 +1,22 @@
 import cv2 as cv
 from cv2 import aruco
 import numpy as np
-from object_detector import *
 
-
-## Calibrate camera
+# Calibrate camera
 calib_data_path = "D:/3/P3/P3-e.DO-robot-arm/MultiMatrix.npz"
-
 calib_data = np.load(calib_data_path)
 print(calib_data.files)
-
 cam_mat = calib_data["camMatrix"]
 dist_coef = calib_data["distCoef"]
 r_vectors = calib_data["rVector"]
 t_vectors = calib_data["tVector"]
 
-MARKER_SIZE = 8  # centimeters
 
+MARKER_SIZE = 1.3  # centimeters
 # Load Aruco detector
 marker_dict = aruco.Dictionary_get(aruco.DICT_5X5_50)
 param_markers = aruco.DetectorParameters_create()
 
-# Load Object Detector
-detector = HomogeneousBgDetector()
-
-# Load Cap
 cap = cv.VideoCapture(2)
 
 while True:
@@ -57,6 +49,7 @@ while True:
             distance = np.sqrt(
                 tVec[i][0][2] ** 2 + tVec[i][0][0] ** 2 + tVec[i][0][1] ** 2
             )
+            
             # Draw the pose of the marker
             point = cv.drawFrameAxes(frame, cam_mat, dist_coef, rVec[i], tVec[i], 4, 4)
             cv.putText(
@@ -79,10 +72,11 @@ while True:
                 2,
                 cv.LINE_AA,
             )
-            # print(ids, "  ", corners)
+            # print(ids, distance)
     cv.imshow("frame", frame)
     key = cv.waitKey(1)
     if key == 27:
         break
 cap.release()
 cv.destroyAllWindows()
+

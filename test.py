@@ -1,7 +1,10 @@
 import cv2 as cv
 from cv2 import aruco
 import numpy as np
+from object_detector import *
 
+
+## Calibrate camera
 calib_data_path = "D:/3/P3/P3-e.DO-robot-arm/MultiMatrix.npz"
 
 calib_data = np.load(calib_data_path)
@@ -14,11 +17,15 @@ t_vectors = calib_data["tVector"]
 
 MARKER_SIZE = 8  # centimeters
 
-marker_dict = aruco.Dictionary_get(aruco.DICT_4X4_50)
-
+# Load Aruco detector
+marker_dict = aruco.Dictionary_get(aruco.DICT_5X5_50)
 param_markers = aruco.DetectorParameters_create()
 
-cap = cv.VideoCapture(0)
+# Load Object Detector
+detector = HomogeneousBgDetector()
+
+# Load Cap
+cap = cv.VideoCapture(2)
 
 while True:
     ret, frame = cap.read()

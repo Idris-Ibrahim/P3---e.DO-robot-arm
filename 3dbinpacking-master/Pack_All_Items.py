@@ -2,7 +2,8 @@ from main import Packer, Bin, Item
 
 packer = Packer()
 
-packer.add_bin(Bin('Stor kasse', 50, 10, 20, 20))
+# packer.add_bin(Bin('Lille kasse', 10, 10, 10, 20))
+packer.add_bin(Bin('Stor kasse', 30, 20, 20, 20))
 
 packer.add_item(Item('Harddrive', 11.5, 1.5, 8, 1))
 packer.add_item(Item('PC Mouse', 7, 4.5, 12, 1))
@@ -13,9 +14,9 @@ packer.add_item(Item('Headset', 26, 7, 22, 1))
 
 while len(packer.items) > 0:
     
-    print("________________________________________________________")
+    print("--------------------------------------------------------")
     print("-------------------  OPEN NEW BOX  ---------------------")
-    print("________________________________________________________")
+    print("--------------------------------------------------------")
     
     packer.pack()
     
@@ -28,7 +29,7 @@ while len(packer.items) > 0:
         exit()
    
     for b in packer.bins:
-        print(":::::::::::", b.string())
+        print("BOX: ", b.string(), "\n")
 
         print("FITTED ITEMS:")
         for item in b.items:
@@ -58,7 +59,8 @@ while len(packer.items) > 0:
     for box in packer.bins:
         for item in box.unfitted_items:
             # Resets rotationtype
-            # Rotation type has to be reset, otherwise the algorithm will only try for the last rotation type with future boxes
+            # Rotation type has to be reset: 
+            # Otherwise the algorithm will only try for the last rotation type with future boxes
             item.rotation_type = 0
             packer.add_item(item)
             

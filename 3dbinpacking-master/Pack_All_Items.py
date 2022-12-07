@@ -1,10 +1,15 @@
 from main import Packer, Bin, Item
 
+
 packer = Packer()
 
+checklist = []
+packedItems= []
 
-packer.add_bin(Bin('Stor kasse', 50, 30, 30, 20))
-packer.add_bin(Bin('Lille kasse', 20, 20, 20, 20))
+
+packer.add_bin(Bin('Lille kasse', 20, 10, 15, 20))
+packer.add_bin(Bin('Stor kasse', 23, 32, 43, 20))
+
 
 packer.add_item(Item('Harddrive', 11.5, 1.5, 8, 1))
 packer.add_item(Item('PC Mouse', 7, 4.5, 12, 1))
@@ -55,12 +60,15 @@ for b in packer.bins:
                 
         # Deletes all items that has been packed from the bins.items array
         packer.items.clear()
+        
         for box in packer.bins:
-            box.items.clear()
+            packedItems.append(box.items)
+        
+        b.items.clear()
+             
 
         # Adds all the items that couldn fit in the box the the array agian for retry without the fitted items    
         for box in packer.bins:
-            checklist = []
             for item in box.unfitted_items:
                 #checks if item has already been re-added to items to be packed
                 if item not in checklist:        
@@ -71,6 +79,7 @@ for b in packer.bins:
                     packer.add_item(item)
                     checklist.append(item)
         
-        box.unfitted_items.clear
-        
+        box.unfitted_items.clear   
     checklist.clear
+    
+    

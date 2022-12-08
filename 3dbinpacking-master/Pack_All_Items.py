@@ -2,16 +2,22 @@ from main import Packer, Bin, Item
 
 packer = Packer()
 
+<<<<<<< HEAD
 # packer.add_bin(Bin('Lille kasse', 10, 10, 10, 20))
 packer.add_bin(Bin('Stor kasse', 30, 20, 20, 20))
+=======
+packer.add_bin(Bin('small-envelope', 25, 30, 40, 300))
+>>>>>>> parent of e25011e (Only by adding 1 bin will it work correctly atm)
 
-packer.add_item(Item('Harddrive', 11.5, 1.5, 8, 1))
-packer.add_item(Item('PC Mouse', 7, 4.5, 12, 1))
-packer.add_item(Item('KeyBoard', 45, 4, 14, 1))
-packer.add_item(Item('Iphone', 8, 1.4, 15, 1))
-packer.add_item(Item('Headset', 26, 7, 22, 1))
+packer.add_item(Item('50g [powder 1]', 25, 30, 17, 1))
+packer.add_item(Item('50g [powder 1]', 25, 30, 17, 1))
+packer.add_item(Item('50g [powder 1]', 25, 30, 17, 1))
+packer.add_item(Item('50g [powder 1]', 25, 30, 17, 1))
+packer.add_item(Item('50g [powder 1]', 25, 30, 17, 1))
 
+packer.pack()
 
+<<<<<<< HEAD
 while len(packer.items) > 0:
     
     print("--------------------------------------------------------")
@@ -30,31 +36,40 @@ while len(packer.items) > 0:
    
     for b in packer.bins:
         print("BOX: ", b.string(), "\n")
+=======
+for b in packer.bins:
+    print(":::::::::::", b.string())
+>>>>>>> parent of e25011e (Only by adding 1 bin will it work correctly atm)
 
-        print("FITTED ITEMS:")
-        for item in b.items:
-            print("====> ", item.string(), "\n")
+    print("FITTED ITEMS:")
+    for item in b.items:
+        print("====> ", item.string())
 
-        print("UNFITTED ITEMS:")
-        for item in b.unfitted_items:
-            print("====> ", item.string(), "\n")
+    print("UNFITTED ITEMS:")
+    for item in b.unfitted_items:
+        print("====> ", item.string())
+
+    print("***************************************************")
+    print("***************************************************")
+
+print("________________________________________________________")
+print("________________________________________________________")
+print("________________________________________________________")
+print("________________________________________________________")
+
+# Deletes all items that has been packed from the bins.items array
+packer.items.clear()
+for box in packer.bins:
+    box.items.clear()
+
+# Adds all the items that couldn fit in the box the the array agian for retry without the fitted items    
+for box in packer.bins:
+    for item in box.unfitted_items:
+        packer.add_item(item)
+    box.unfitted_items.clear()
         
-        #Iratible variable for counting empty space in the box    
-        TotalVolume = 0
-        for item in b.items:
-            ItemVolume = item.get_volume()
-            TotalVolume += ItemVolume
-        
-        BinVolume = b.get_volume()  
-        EmptySpace = BinVolume - TotalVolume
-        print("UNUSED VOLUME:")
-        print("====> ", EmptySpace, "\n")
-            
-    # Deletes all items that has been packed from the bins.items array
-    packer.items.clear()
-    for box in packer.bins:
-        box.items.clear()
 
+<<<<<<< HEAD
     # Adds all the items that couldn fit in the box the the array agian for retry without the fitted items    
     for box in packer.bins:
         for item in box.unfitted_items:
@@ -65,3 +80,25 @@ while len(packer.items) > 0:
             packer.add_item(item)
             
     box.unfitted_items.clear()
+=======
+print("________________________________________________________")
+print("________________________________________________________")
+print("________________________________________________________")
+print("________________________________________________________")
+
+packer.pack()
+
+for b in packer.bins:
+    print(":::::::::::", b.string())
+
+    print("FITTED ITEMS:")
+    for item in b.items:
+        print("====> ", item.string())
+
+    print("UNFITTED ITEMS:")
+    for item in b.unfitted_items:
+        print("====> ", item.string())
+
+    print("***************************************************")
+    print("***************************************************")
+>>>>>>> parent of e25011e (Only by adding 1 bin will it work correctly atm)

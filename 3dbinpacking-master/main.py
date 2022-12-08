@@ -265,4 +265,5 @@ class Packer:
                 
                 elif self.bins[i].get_volume() * M < self.bins[i+1].get_volume:
                     
-                    for 
+                    for unfitted_item in bin.unfitted_items:
+                        bin.add_item(unfitted_item)

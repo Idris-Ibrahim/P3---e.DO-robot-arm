@@ -24,7 +24,7 @@ class Item:
         self.number_of_decimals = number_of_decimals
 
     def string(self):
-        return "%s(%sx%sx%s, weight: %s) pos(%s) rt(%s) vol(%s)" % (
+        return "%s (%s x %s x %s, weight: %s) pos(%s) rt(%s) vol(%s)" % (
             self.name, self.width, self.height, self.depth, self.weight,
             self.position, self.rotation_type, self.get_volume()
         )
@@ -226,6 +226,12 @@ class Packer:
         
         # skal gemme alle de kasser der er blevet pakket:    
         BinList = []
+        
+        # gemmer alle items der skal håndteres:
+        ItemList = []
+        
+        #Multiplier variable for testing if next bin is bigger than adding a new bin:
+        M = 2
             
         self.bins = sorted(self.bins, key=lambda bin: bin.get_volume(), reverse=False)
         
@@ -234,12 +240,29 @@ class Packer:
         for i in range(len(self.bins)):
             
             for j in range(len(self.items)):
+                ItemList.append(self.items[j])
                 self.pack_to_bin(self.bins[i], self.items[j])
                 
             if len(self.bins[i].unfitted_items) == 0:
+                BinList.append(self.bins[i])
+                
                 print("ALL ITEMS PACKED:")
+                print("BIN TYPE:", BinList[i].string(),"\n")
+                print("ITEMS PACKED: \n")
+                
                 for item in self.bins[i].items:
-                    print("====>", item.string())
+                    print("====>", item.string(),"\n")
                         
-            else:
-                print("lort")        
+            elif len(self.bins[i].unfitted_items) > 0:
+                
+                if self.bins[i].get_volume() * M >= self.bins[i+1].get_volume:
+                    
+                    for l in ItemList:
+                        self.add_item(l)
+                    i += 1
+                    M = 2
+                    break
+                
+                elif self.bins[i].get_volume() * M < self.bins[i+1].get_volume:
+                    
+                    for 

@@ -216,8 +216,7 @@ class Packer:
                     self.items.remove(item)
     
     def pack_all_items(
-        self, bigger_first=False, distribute_items=False,
-        number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS
+        self, number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS
     ):
         for bin in self.bins:
             bin.format_numbers(number_of_decimals)
@@ -232,30 +231,15 @@ class Packer:
         
         self.items = sorted(self.items, key=lambda item: item.get_volume(), reverse=True)
         
-        for bin in self.bins:
-            print("--------------------------------------------------------")
-            print("-------------------  OPEN NEW BIN  ---------------------")
-            print("--------------------------------------------------------\n")
-            print("BIN TYPE: ", bin.string, "\n")
-            for item in self.items:
-                self.pack_to_bin(bin, item)
-                #if all items couldn be packed, open new box:
-                if len(bin.unfitted_items) == 0:
-                    
-                    # skal pritnte den givne configuration for kassen der kunne holde alle items:
-                        print("FITTED ITEMS:")
-                        for item in bin.items:
-                            print("====> ", item.string(), "\n")
-                            
-                if len(bin.unfitted_items) > 0:
-                    if bin.get_volume() * 2 < bin[+1].get_volume():
-                        bin += 1
-                        break
-                    elif bin.get_volume() * 2 >= bin[+1].get_volume():
-                        for item in bin.unfitted_items:
-                            item.rotation_type = 0
-                            self.add_item(item)
-                            for item in self.items:
-                                self.pack_to_bin(bin, item)
-                        bin.unfitted_item.clear
+        for i in range(len(self.bins)):
+            
+            for j in range(len(self.items)):
+                self.pack_to_bin(self.bins[i], self.items[j])
+                
+            if len(self.bins[i].unfitted_items) == 0:
+                print("ALL ITEMS PACKED:")
+                for item in self.bins[i].items:
+                    print("====>", item.string())
                         
+            else:
+                print("lort")        

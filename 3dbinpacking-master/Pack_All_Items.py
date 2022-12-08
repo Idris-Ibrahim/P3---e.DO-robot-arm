@@ -4,8 +4,8 @@ packer = Packer()
 
 volumelist = []
 
-packer.add_bin(Bin('Lille kasse', 20, 10, 15, 20))
-packer.add_bin(Bin('Stor kasse', 23, 32, 43, 20))
+#packer.add_bin(Bin('Lille kasse', 20, 10, 15, 20))
+#packer.add_bin(Bin('Stor kasse', 23, 32, 43, 20))
 packer.add_bin(Bin('Kæmpe kasse', 50, 50, 70, 20))
 
 

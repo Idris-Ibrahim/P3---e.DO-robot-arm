@@ -185,11 +185,13 @@ class Packer:
                     fitted = True
                     break
             if fitted:
+                #my addition:
+                #removes packed items from the packer object
+                self.items.remove(item)
                 break
 
         if not fitted:
             bin.unfitted_items.append(item)
-        
 
     def pack(
         self, bigger_first=False, distribute_items=False,
@@ -275,6 +277,7 @@ class Packer:
                 #Tries to pack all items in given bin:                    
                 self.pack_to_bin(self.bins[i], self.items[j])
                 
+                
                 if control == len(self.items):
                                 
                     #Document the packed bin in BinList:
@@ -313,6 +316,7 @@ class Packer:
                             print("UNPACKED", items.string(), i,"\n")
                         for items in BinList[pb].items:
                             print("PACKED", items.string(), i,"\n")
+                            
                             
                         # if there is no bigger bins to use:
                         # pack remaining items in the biggest bin type given
@@ -364,6 +368,7 @@ class Packer:
                             
                             M = 2
                             pb = 0
+                            control = 0
                             
                             for l in ItemList:
                                 self.add_item(l)

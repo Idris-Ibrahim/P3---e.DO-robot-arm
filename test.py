@@ -17,7 +17,10 @@ MARKER_SIZE = 1.3  # centimeters
 marker_dict = aruco.Dictionary_get(aruco.DICT_5X5_50)
 param_markers = aruco.DetectorParameters_create()
 
-cap = cv.VideoCapture(4)
+# Load Cap
+cap = cv.VideoCapture(1)
+cap.set(cv.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv.CAP_PROP_FRAME_HEIGHT, 720)
 
 alld10 =[]
 alld11 =[]
@@ -36,7 +39,7 @@ while True:
         total_markers = range(0, marker_IDs.size)
         for ids, corners, i in zip(marker_IDs, marker_corners, total_markers):
             cv.polylines(
-                frame, [corners.astype(np.int32)], True, (0, 255, 255), 4, cv.LINE_AA
+                frame, [corners.astype(np.int32)], True, (0, 0, 255), 4, cv.LINE_AA
             )
             corners = corners.reshape(4, 2)
             corners = corners.astype(int)
@@ -64,35 +67,34 @@ while True:
                 2,
                 cv.LINE_AA,
             )
-            cv.putText(
-                frame,
-                f"x:{round(tVec[i][0][0],1)} y: {round(tVec[i][0][1],1)} ",
-                bottom_right,
-                cv.FONT_HERSHEY_PLAIN,
-                1.0,
-                (0, 0, 255),
-                2,
-                cv.LINE_AA,
-            )
+            #cv.putText(
+            #    frame,
+            #    f"x:{round(tVec[i][0][0],1)} y: {round(tVec[i][0][1],1)} ",
+            #    bottom_right,
+            #    cv.FONT_HERSHEY_PLAIN,
+            #    1.0,
+            #    (0, 0, 255),
+            #    2,
+            #    cv.LINE_AA,
+            #)
             #print(ids, distance)
 
-        if (ids == [10]):
-            print(ids, distance)
-            alld10.append(distance)
-            #print(alld10)
-            avg10 = sum(alld10) / len(alld10)
-            #print("avarage distance for id 10 is: ", round(avg10,2))
+            if (ids == [10]):
+                print(ids, distance)
+                alld10.append(distance)
+                #print(alld10)
+                avg10 = sum(alld10) / len(alld10)
+                print("avarage distance for id 10 is: ", round(avg10,2))
         
-        if (ids == [11]):
-            print(ids, distance)
-            alld11.append(distance)
-            #print(alld11)
-            avg11 = sum(alld11) / len(alld11)
-            #print("avarage distance for id 11 is: ", round(avg11,2))
-        
-            hight = avg10 - avg11
-            print("endleig højde", hight)
-           
+            if (ids == [11]):
+                print(ids, distance)
+                alld11.append(distance)
+                #print(alld11)
+                avg11 = sum(alld11) / len(alld11)
+                print("avarage distance for id 11 is: ", round(avg11,2))
+            
+                hight = avg10 - avg11
+                print("endleig højde", hight)
     cv.imshow("frame", frame)
     key = cv.waitKey(1)
     if key == 27:

@@ -243,10 +243,10 @@ class Packer:
         self.items = sorted(self.items, key=lambda item: item.get_volume(), reverse=True)
         
         # checking for each bin type, starting with the smallest:
-        for i in range(len(self.bins)):
+        for i in range(len(self.bins)-1):
             
             # checking for each item type, starting with the biggest:
-            for j in range(len(self.items)):
+            for j in range(len(self.items)-1):
                 
                 #To prevent adding duplicate items:
                 if self.items[j] not in ItemList:

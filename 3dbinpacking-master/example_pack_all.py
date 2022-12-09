@@ -1,5 +1,7 @@
 from main import Packer, Bin, Item
 
+#if items have same dimentions and max weight, they must have different names
+
 packer = Packer()
 
 packer.add_bin(Bin('SMALL BIN', 10, 10, 12, 300))

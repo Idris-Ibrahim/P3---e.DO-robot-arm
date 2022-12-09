@@ -252,8 +252,8 @@ class Packer:
                 if self.items[j] not in ItemList:
                     ItemList.append(self.items[j])
                 
-                #Tries to pack given item in given bin:                    
-                self.pack_to_bin(self.bins[i], self.items[j])
+            #Tries to pack given item in given bin:                    
+            self.pack_to_bin(self.bins[i], self.items[j])
             
             # if no items where left unpacked:
             # print result and solution:
@@ -264,8 +264,8 @@ class Packer:
                 print("BIN TYPE:", BinList[i].string(),"\n")
                 print("ITEMS PACKED: \n")
                 
-                for p in range(len(BinList)-1):
-                    for item in BinList[p].items:
+                for packedbins in BinList:
+                    for item in packedbins.items:
                         print("====>", item.string())
                         
             # if some items where left unpacked:
@@ -300,7 +300,7 @@ class Packer:
                         self.add_item(l)
                     i += 1
                     M = 2
-                    break
+                    continue
                 
                 # if using another bin of the same bin size result in more total bin volume than using the next bin:
                 # try packing all items in new bin (bigger bin type)

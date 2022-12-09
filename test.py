@@ -19,10 +19,12 @@ param_markers = aruco.DetectorParameters_create()
 
 cap = cv.VideoCapture(2)
 
+alld10 =[]
+alld11 =[]
 while True:
     ret, frame = cap.read()
     if not ret:
-        break
+        break  
     gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     marker_corners, marker_IDs, reject = aruco.detectMarkers(
         gray_frame, marker_dict, parameters=param_markers
@@ -72,7 +74,27 @@ while True:
                 2,
                 cv.LINE_AA,
             )
-            # print(ids, distance)
+            #print(ids, distance)
+
+        if (ids == [10]):
+            print(ids, distance)
+            alld10.append(distance)
+            #print(alld10)
+            avg10 = sum(alld10) / len(alld10)
+            #print("avarage distance for id 10 is: ", round(avg10,2))
+        
+        if (ids == [11]):
+            print(ids, distance)
+            alld11.append(distance)
+            #print(alld11)
+            avg11 = sum(alld11) / len(alld11)
+            #print("avarage distance for id 11 is: ", round(avg11,2))
+        
+            hight = avg10 - avg11
+            print("endleig højde", hight)
+           
+    if i == 50:
+        exit()
     cv.imshow("frame", frame)
     key = cv.waitKey(1)
     if key == 27:

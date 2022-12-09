@@ -2,7 +2,7 @@ from main import Packer, Bin, Item
 
 packer = Packer()
 
-packer.add_bin(Bin('SMALL BIN', 18, 20, 20, 300))
+packer.add_bin(Bin('SMALL BIN', 10, 10, 12, 300))
 
 packer.add_bin(Bin('BIG BIN', 100, 300, 300, 300))
 

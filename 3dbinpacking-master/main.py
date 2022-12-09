@@ -201,7 +201,7 @@ class Packer:
             item.format_numbers(number_of_decimals)
 
         self.bins.sort(
-            key=lambda bin: bin.get_volume()
+            key=lambda bin: bin.get_volume(), reverse=bigger_first
         )
         self.items.sort(
             key=lambda item: item.get_volume(), reverse=bigger_first
@@ -230,6 +230,9 @@ class Packer:
         # List for saving all packed bins:    
         BinList = []
         
+        #list for saving volumes of all bins:
+        VolumeBinList = []
+        
         # List for saving all processed items:
         ItemList = []
         
@@ -237,7 +240,7 @@ class Packer:
         M = 2
         
         # sorts bins in order from smallest to biggest:    
-        self.bins = sorted(self.bins, key=lambda bin: bin.get_volume(), reverse=False)
+        self.bins = sorted(self.bins, key=lambda bin: bin.get_volume())
         
         # sorts items in order from biggest to smallest:
         self.items = sorted(self.items, key=lambda item: item.get_volume(), reverse=True)
@@ -246,11 +249,15 @@ class Packer:
         i = 0
         j = 0
         
+        #Saving all bin volumes:
+        for bin in self.bins:
+            VolumeBinList.append(bin.get_volume())
+        
         # checking for each bin type, starting with the smallest:
-        for i in range(len(self.bins)-1):
+        for i in range(len(self.bins)):
             
-            # checking for each item type, starting with the biggest:
-            for j in range(len(self.items)-1):
+            # trying to pack all items in the smallest bin, starting with the biggest:
+            for j in range(len(self.items)):
                 
                 #To prevent adding duplicate items:
                 if self.items[j] not in ItemList:
@@ -259,55 +266,60 @@ class Packer:
                 #Tries to pack all items in given bin:                    
                 self.pack_to_bin(self.bins[i], self.items[j])
                 
-                j += 1
             
+            BinList.append(self.bins[i])
             # if no items where left unpacked:
             # print result and solution:
-            for i in BinList
-                if len(self.bins[i].unfitted_items) == 0:
-                    BinList.append(self.bins[i])
+            
+            if len(BinList[i].unfitted_items) == 0 :
                     
                     print("ALL ITEMS PACKED: \n")
-                    print("BIN TYPE:", BinList[i].string(),"\n")
-                    print("ITEMS PACKED: \n")
                     
+                    for s in range(len(BinList)):
+                        print("BIN TYPE:", BinList[i].string(),"\n")
+                        print("ITEMS PACKED: \n")
+                        for g in BinList[s].items:
+                            print("===>", g.string(),"\n")
+                            
                     ItemsTotalVolume = 0
                     BinTotalVolume = 0
                     
                     for bins in BinList:
                         BinTotalVolume += bins.get_volume()
                         for item in bins.items:
-                            print("====>", item.string(), "\n")
-                            
                             ItemsTotalVolume += item.get_volume()
+                    
                     wastedSpace = BinTotalVolume - ItemsTotalVolume
                     
-                    print("UNUSED VOLUME:", wastedSpace ,"\n")       
-                # if some items where left unpacked:
-                # then we are not done! :D            
-                elif len(self.bins[i].unfitted_items) > 0:
+                    print("UNUSED VOLUME:", wastedSpace ,"\n")  
+                    
+                    exit()
+                         
+            # if some items where left unpacked:
+            # then we are not done! :D            
+            elif len(BinList[i].unfitted_items) > 0:
                 
                 # if there is no bigger bins to use:
                 # pack remaining items in the biggest bin type given
-                    if i >= len(self.bins):
+                if i >= len(self.bins):
                     
-                        if self.bins[i].items == 0:
+                        if BinList[i].items == 0:
                             print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BINS")
                             print("UNPACKABLE ITEMS:\n")
                         
-                        for item in self.bins[i].unfitted_items:
-                            print("====>", item.string(),"\n")
+                            for item in self.bins[i].unfitted_items:
+                                print("====>", item.string(),"\n")
                     
-                        BinList.append(self.bins[i])
+                            BinList.append(self.bins[i])
                     
-                        for unfitted_item in bin.unfitted_items:
-                            bin.add_item(unfitted_item)
+                            for unfitted_item in bin.unfitted_items:
+                                bin.add_item(unfitted_item)
                     
-                        continue
+                            continue
                 
                 # if using another bin of the same bin size result in less total bin volume than using the next bin:
                 # try packing remaining items in new bin (same bin type)
-                elif self.bins[i].get_volume() * M >= self.bins[i+1].get_volume:
+                elif VolumeBinList[i-1] * M >= VolumeBinList[i]:
                     
                     BinList.append(self.bins[i])
                     
@@ -319,14 +331,14 @@ class Packer:
                 
                 # if using another bin of the same bin size result in more total bin volume than using the next bin:
                 # try packing all items in new bin (bigger bin type)
-                elif self.bins[i].get_volume() * M < self.bins[i+1].get_volume:
+                elif VolumeBinList[i-1] * M < VolumeBinList[i]:
                     
                     BinList.append(self.bins[i])
                     M += 1
                     for unfitted_item in bin.unfitted_items:
-                        bin.add_item(unfitted_item)
+                        self.add_item(unfitted_item)
                     
                     continue
                 
-                else:
-                    print("ERROR")
+            else:
+                print("ERROR")

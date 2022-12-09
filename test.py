@@ -17,7 +17,7 @@ MARKER_SIZE = 1.3  # centimeters
 marker_dict = aruco.Dictionary_get(aruco.DICT_5X5_50)
 param_markers = aruco.DetectorParameters_create()
 
-cap = cv.VideoCapture(2)
+cap = cv.VideoCapture(4)
 
 alld10 =[]
 alld11 =[]
@@ -93,8 +93,6 @@ while True:
             hight = avg10 - avg11
             print("endleig højde", hight)
            
-    if i == 50:
-        exit()
     cv.imshow("frame", frame)
     key = cv.waitKey(1)
     if key == 27:

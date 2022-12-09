@@ -289,23 +289,21 @@ class Packer:
                 # print result and solution:
                 if len(BinList[pb].unfitted_items) == 0 :
                     print("ALL ITEMS PACKED: \n")
-                            
-                    for bins in BinList:
-                        print("ITEMS PACKED in", bin.string(),  ": \n")
-                        for item in bins.items:
-                                print("===>", item.string(),"\n")
-                                    
+                    
                     ItemsTotalVolume = 0
-                    BinTotalVolume = 0
-                            
+                    
+                    BinTotalVolume = 0     
+                       
                     for bins in BinList:
                         BinTotalVolume += bins.get_volume()
+                        print("ITEMS PACKED IN", bins.string(),  ": \n")
                         for item in bins.items:
-                                ItemsTotalVolume += item.get_volume()
+                            ItemsTotalVolume += item.get_volume()
+                            print("===>", item.string(),"\n")
                             
-                    wastedSpace = BinTotalVolume - ItemsTotalVolume
-                            
-                    print("UNUSED VOLUME:", wastedSpace ,"\n")  
+                        wastedSpace = BinTotalVolume - ItemsTotalVolume
+                        
+                        print("UNUSED VOLUME:", wastedSpace ,"\n")            
                             
                     exit()
                                 

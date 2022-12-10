@@ -288,6 +288,9 @@ class Packer:
                 # try only appending binlist in bin * m < next bin
                 BinList.append(self.bins[i])
                 
+                for check in range(len(BinList)):
+                    print("bins:", BinList[check].string())
+                
                 unfits = 0
                 
                 for k in range(len(BinList)):
@@ -355,6 +358,8 @@ class Packer:
                                 
                             print("ERROR")
                             exit()
+                        
+                        BinList.append(self.bins[i])
                                 
                         pb += 1
                         

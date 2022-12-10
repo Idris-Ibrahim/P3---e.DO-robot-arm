@@ -356,8 +356,10 @@ class Packer:
                             exit()
                                 
                         pb += 1
-                            
+                        
                         M += 1
+                        
+                        print("\n SAME \n M=", M, "\n")
                             
                         continue
                         
@@ -370,9 +372,12 @@ class Packer:
                         pb = 0
                             
                         for item in self.items:
-                            ItemList.append(item)
+                            if item not in ItemList:
+                                ItemList.append(item)
                             
                         BinList.clear()
+                        
+                        print("\n NEw \n M=", M, "\n")
                             
                         break
                         

@@ -285,6 +285,7 @@ class Packer:
                 ItemList.clear()
                                 
                 #Document the packed bin in BinList:
+                # try only appending binlist in bin * m < next bin
                 BinList.append(self.bins[i])
                 
                 unfits = 0

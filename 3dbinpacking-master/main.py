@@ -230,6 +230,9 @@ class Packer:
         # List for saving all packed bins:    
         BinList = []
         
+        #index for binlist
+        pb = 0
+        
         #list for saving volumes of all bins:
         VolumeBinList = []
         
@@ -248,7 +251,6 @@ class Packer:
         #index of bin and items:
         i = 0
         j = 0
-        pb = 0
         
         #control is used to restart the j loop to pack all items before proceding
         control = 0
@@ -284,20 +286,25 @@ class Packer:
                                 
                 #Document the packed bin in BinList:
                 BinList.append(self.bins[i])
+                
+                unfits = 0
+                
+                for k in range(len(BinList)):
+                    unfits += len(BinList[k].unfitted_items)
                     
                 # if no items where left unpacked:
                 # print result and solution:
-                if len(BinList[pb].unfitted_items) == 0 :
+                if unfits == 0 :
                     print("ALL ITEMS PACKED: \n")
                     
                     ItemsTotalVolume = 0
                     
                     BinTotalVolume = 0     
                        
-                    for bins in BinList:
-                        BinTotalVolume += bins.get_volume()
-                        print("ITEMS PACKED IN", bins.string(),  ": \n")
-                        for item in bins.items:
+                    for b in range(len(BinList)):
+                        BinTotalVolume += BinList[b].get_volume()
+                        print("ITEMS PACKED IN", BinList[b].string(),  ": \n")
+                        for item in BinList[b].items:
                             ItemsTotalVolume += item.get_volume()
                             print("===>", item.string(),"\n")
                             
@@ -309,14 +316,7 @@ class Packer:
                                 
                 # if some items where left unpacked:
                 # then we are not done! :D            
-                elif len(BinList[pb].unfitted_items) > 0:
-                        
-                    print(BinList[pb].string(),"\n")
-                    for items in BinList[pb].unfitted_items:
-                        print("UNPACKED", items.string(), i,"\n")
-                    for items in BinList[pb].items:
-                        print("PACKED", items.string(), i,"\n")
-                            
+                elif unfits > 0:
                             
                     # if there is no bigger bins to use:
                     # pack remaining items in the biggest bin type given

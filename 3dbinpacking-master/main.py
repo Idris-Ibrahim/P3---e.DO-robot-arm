@@ -239,6 +239,10 @@ class Packer:
         # List for saving all items to be processed:
         ItemList = []
         
+        # Initial population of ItemList (All items)
+        for item in self.items:
+            ItemList.append(item)
+            
         # Multiplier variable for testing if next bin is bigger than adding a new bin:
         M = 2
         
@@ -248,13 +252,6 @@ class Packer:
         # sorts items in order from biggest to smallest:
         self.items = sorted(self.items, key=lambda item: item.get_volume(), reverse=True)
         
-        #index of bin and items:
-        i = 0
-        j = 0
-        
-        #control is used to restart the j loop to pack all items before proceding
-        control = 0
-        
         #Saving all bin volumes:
         for bin in self.bins:
             VolumeBinList.append(bin.get_volume())
@@ -262,43 +259,23 @@ class Packer:
         # checking for each bin type, starting with the smallest:
         for i in range(len(self.bins)):
             
-            # inserting all items in the packer object to itemlist:
-            for j in range(len(self.items)):
+            # infinite while loop for continuos testing of packing possibilities:
+            # len(itemlist for bug testing:)
+            while 1:
                 
-                #To prevent adding duplicate items:
-                if self.items[j] not in ItemList:
-                    self.items[j].rotation_type = 0
-                    ItemList.append(self.items[j])
-            
-            control = len(ItemList)
-                
-            for j in range(len(ItemList)):
-                
-                print("\n for j \n ")
-                
+                #sort items in ItemList from smallest to biggest:
                 ItemList = sorted(ItemList, key=lambda item: item.get_volume(), reverse=True)
                 
-                #Tries to pack all items in given bin:                    
-                self.pack_to_bin(self.bins[i], ItemList[j])
+                for item in range(len(ItemList)):
+                    self.pack_to_bin(self.bins[i], ItemList[item])
                 
-                #Decrement control to indicate that we have attempted to pack another item
-                control -= 1
+                # Document the packed bin in BinList:
+                # Try only appending binlist in bin * m < next bin
+                BinList.append(self.bins[i])          
                 
-                # If all items have not yet been attempted to be packed in the bin
-                # Restart the loop to pack the next item:
-                if control > 0:
-                    continue
-                
-                #Clear the list of items     
+                # Reset list of items to be packed:
                 ItemList.clear()
-                                
-                #Document the packed bin in BinList:
-                # try only appending binlist in bin * m < next bin
                 
-                BinList.append(self.bins[i])
-                
-                print("binlist check: line 296, LENGTH: ", len(BinList))
-                    
                 # if no items where left unpacked:
                 # print result and solution:
                 if len(BinList[pb].unfitted_items) == 0 :
@@ -310,85 +287,85 @@ class Packer:
                        
                     for b in range(len(BinList)):
                         BinTotalVolume += BinList[b].get_volume()
-                        print("ITEMS PACKED IN", BinList[b].string(),  ": \n")
+                        print(f"ITEMS PACKED IN BIN NUMBER {b+1}", BinList[b].string(),  ": \n")
                         for item in BinList[b].items:
                             ItemsTotalVolume += item.get_volume()
                             print("===>", item.string(),"\n")
                             
                         wastedSpace = BinTotalVolume - ItemsTotalVolume
                         
-                        print("UNUSED VOLUME:", wastedSpace ,"\n")            
+                    print("TOTAL UNUSED VOLUME:", wastedSpace ,"\n")            
                             
                     exit()
                                 
                 # if some items where left unpacked:
                 # then we are not done! :D            
                 if len(BinList[pb].unfitted_items) > 0 :
-                    
-                    print("\n unfitted detected \n")        
+                            
                     # if there is no bigger bins to use:
-                    # pack remaining items in the biggest bin type given
                     if i+1 == len(self.bins):
                         
-                        print("\n no bigger box \n")   
-                            
+                        #if no remaining items could be packed in the biggest bin type:
+                        #then we know that this items cannot fit into any bin type    
                         if len(BinList[pb].items) == 0:   
-                                print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BINS")
-                                print("UNPACKABLE ITEMS IN BIN TYPE:", self.bins[i].string(), "\n")
+                            print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BINS")
+                            print("UNPACKABLE ITEMS IN BIN TYPE:", self.bins[i].string(), "\n")
                             
-                        for item in BinList[pb].unfitted_items:
-                                ItemList.append(item)
-                                print("====>", item.string(),"\n")     
+                            for item in BinList[pb].unfitted_items:
+                                    ItemList.append(item)
+                                    print("UNFIT: \n====>", item.string(),"\n")     
+                                    
+                            exit()
                             
+                        #reassign the missing items, in unfitted_items, to ItemList to be packed in a new bin:
                         for unfitted in BinList[pb].unfitted_items:
                             unfitted.rotation_type = 0
                             ItemList.append(unfitted)
                             
-                            control += 1
+                        #self.bins.items has to be cleared before new items can fit in the given bin:
+                        self.bins[i].items.clear()
                             
                         BinList[pb].unfitted_items.clear()
-                                
-                        pb += 1
+                        
+                        pb += 1 
                             
                         continue
                         
                     # if using another bin of the same bin size result in less total bin volume than using the next bin:
                     # try packing remaining items in new bin (same bin type)
-                    elif VolumeBinList[i] * M < VolumeBinList[i+1]: 
-                         
-                        print("\n open new box \n")     
+                    elif VolumeBinList[i] * M < VolumeBinList[i+1]:   
                             
                         for unfitted in BinList[pb].unfitted_items:
                             unfitted.rotation_type = 0
                             ItemList.append(unfitted)
                             
-                            control += 1
-                            
                         BinList[pb].unfitted_items.clear()
+                        
+                        #self.bins.items has to be cleared before new items can fit in the given bin:
+                        self.bins[i].items.clear()
                                 
                         pb += 1
                         
                         M += 1
-                            
+                        
                         continue
                         
                     # if using another bin of the same bin size result in more total bin volume than using the next bin:
                     # try packing all items in new bin (bigger bin type)
                     elif VolumeBinList[i] * M >= VolumeBinList[i+1]:
-                        
-                        print("\n try bigger box \n")
                             
                         for item in self.items:
-                            if item not in ItemList:
-                                ItemList.append(item)
+                            item.rotation_type = 0
+                            ItemList.append(item)
                             
                         BinList.clear()
-                        
-                        control = len(ItemList)
                         
                         M = 2
                             
                         pb = 0
+                        
+                        #self.bins.items has to be cleared before new items can fit in the given bin:
+                        self.bins[i].items.clear()
                             
                         break
                         

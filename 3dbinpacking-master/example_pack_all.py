@@ -10,7 +10,7 @@ packer = Packer()
 
 packer.add_bin(Bin('SMALL BIN', 10, 10, 12, 300))
 
-#packer.add_bin(Bin('BIG BIN', 100, 100, 100, 300))
+packer.add_bin(Bin('BIG BIN', 100, 100, 100, 300))
 
 #packer.add_bin(Bin('BIGGEST BIN', 100, 100, 200, 300))
 

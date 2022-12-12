@@ -17,12 +17,12 @@ packer.add_bin(Bin('BIGGEST BIN', 100, 100, 200, 300))
 
 packer.add_item(Item('Fugl', 10, 10, 7, 1))
 
-#packer.add_item(Item('Hund', 20, 10, 20, 1))
+packer.add_item(Item('Hund', 20, 10, 20, 1))
 
 packer.add_item(Item('Mus', 8, 5, 12, 1))
 
-#packer.add_item(Item('Rat', 8, 5, 12, 1))
+packer.add_item(Item('Rat', 8, 5, 12, 1))
 
-#packer.add_item(Item('Elefant', 100, 100, 200, 1))
+packer.add_item(Item('Elefant', 100, 100, 200, 1))
 
 packer.pack_all_items()

@@ -464,7 +464,10 @@ class Packer:
         M = 2
         
         # randomize the order of bins to be used   
-        random.shuffle(self.bins)
+        # random.shuffle(self.bins)
+        
+        # sorts bins in order from smallest to biggest:    
+        self.bins = sorted(self.bins, key=lambda bin: bin.get_volume())
         
         # randomize the order of items to be packed
         random.shuffle(self.items)

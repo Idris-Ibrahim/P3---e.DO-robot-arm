@@ -16,7 +16,7 @@ def add():
     packer.add_bin(Bin('DOUBLE - SMALL BIN', 20, 10, 12, 30))
     packer.add_bin(Bin('MEDIUM BIN', 30, 15, 20, 80))
     packer.add_bin(Bin('BIG BIN', 50, 30, 40, 150))
-    packer.add_bin(Bin('HUGE BIN', 100, 200, 200, 200))
+    packer.add_bin(Bin('HUGE BIN', 100, 50, 100, 200))
 
     # ADDING ITEMS TO BE PACKED:
 
@@ -26,7 +26,6 @@ def add():
     packer.add_item(Item('Rat', 8, 5, 12, 3))
     packer.add_item(Item('Turtle', 5, 4, 15, 4))
     packer.add_item(Item('Anaconda', 10, 4, 4, 2))
-    #packer.add_item(Item('Elefant', 100, 100, 200, 150))
 
 #CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
 

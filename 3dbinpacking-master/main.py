@@ -398,6 +398,7 @@ class Packer:
         for axis in range(0, 3):
             items_in_bin = bin.items
 
+            #randomizes pivot for each item:
             for ib in items_in_bin:
                 pivot = [random.randrange(0,bin.width),
                          random.randrange(0,bin.height), 
@@ -406,21 +407,21 @@ class Packer:
                 w, h, d = ib.get_dimension()
                 if axis == Axis.WIDTH:
                     pivot = [
-                        ib.position[0] + random.randrange(0,bin.width),
-                        ib.position[1] + random.randrange(0,bin.height),
-                        ib.position[2] + random.randrange(0,bin.depth)
+                        random.randrange(0,bin.width),
+                        random.randrange(0,bin.height),
+                        random.randrange(0,bin.depth)
                     ]
                 elif axis == Axis.HEIGHT:
                     pivot = [
-                        ib.position[0] + random.randrange(0,bin.width),
-                        ib.position[1] + random.randrange(0,bin.height),
-                        ib.position[2] + random.randrange(0,bin.depth)
+                        random.randrange(0,bin.width),
+                        random.randrange(0,bin.height),
+                        random.randrange(0,bin.depth)
                     ]
                 elif axis == Axis.DEPTH:
                     pivot = [
-                        ib.position[0] + random.randrange(0,bin.width),
-                        ib.position[1] + random.randrange(0,bin.height),
-                        ib.position[2] + random.randrange(0,bin.depth)
+                        random.randrange(0,bin.width),
+                        random.randrange(0,bin.height),
+                        random.randrange(0,bin.depth)
                     ]
 
                 if bin.put_item(item, pivot):
@@ -462,11 +463,11 @@ class Packer:
         # Multiplier variable for testing if next bin is bigger than adding a new bin:
         M = 2
         
-        # sorts bins in order from smallest to biggest:    
-        self.bins = sorted(self.bins, key=lambda bin: bin.get_volume())
+        # randomize the order of bins to be used   
+        random.shuffle(self.bins)
         
-        # sorts items in order from biggest to smallest:
-        self.items = sorted(self.items, key=lambda item: item.get_volume(), reverse=True)
+        # randomize the order of items to be packed
+        random.shuffle(self.items)
         
         #Saving all bin volumes:
         for bin in self.bins:

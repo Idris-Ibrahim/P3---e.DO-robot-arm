@@ -45,6 +45,7 @@ while True:
 ## kamera 1
     # Get Aruco marker
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    
     corners, _, _ = cv2.aruco.detectMarkers(frame, marker_dict, parameters=param_markers)
     marker_corners, marker_IDs, reject = aruco.detectMarkers(gray_frame, marker_dict, parameters=param_markers)
     
@@ -84,29 +85,14 @@ while True:
             box = cv2.boxPoints(rect)
             box = np.int0(box)
 
-            cv2.drawFrameAxes(frame, cam_mat, dist_coef, rVec[i], tVec[i], 4, 4)
+            #cv2.drawFrameAxes(frame, cam_mat, dist_coef, rVec[i], tVec[i], 4, 4)
             cv2.putText(frame, f"id: {ids[0]} Dist: {round(distance, 1)}", (int(x - 100), int(y - 30)),cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2)
             cv2.circle(frame, (int(x), int(y)), 5, (0, 0, 255), -1)
             cv2.polylines(frame, [box], True, (255, 0, 0), 5)
             cv2.putText(frame, "Width {} cm".format(round(object_width, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
             cv2.putText(frame, "Height {} cm".format(round(object_height, 1)), (int(x - 100), int(y + 15)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
         
-            if (ids == [10]):
-                #print(ids, distance)
-                alld10.append(distance)
-                #print(alld10)
-                avg10 = sum(alld10) / len(alld10)
-                #print("avarage distance for id 10 is: ", round(avg10,2))
-        
-            if (ids == [11]):
-                #print(ids, distance)
-                alld11.append(distance)
-                #print(alld11)
-                avg11 = sum(alld11) / len(alld11)
-                #print("avarage distance for id 11 is: ", round(avg11,2))
-            
-                hight = avg10 - avg11
-                print("endleig højde", hight)       
+                 
         
         
         print("Width: ", object_width, "Length: ", object_height)    

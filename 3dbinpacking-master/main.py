@@ -403,26 +403,6 @@ class Packer:
                 pivot = [random.randrange(0,bin.width),
                          random.randrange(0,bin.height), 
                          random.randrange(0,bin.depth)]
-                
-                w, h, d = ib.get_dimension()
-                if axis == Axis.WIDTH:
-                    pivot = [
-                        random.randrange(0,bin.width),
-                        random.randrange(0,bin.height),
-                        random.randrange(0,bin.depth)
-                    ]
-                elif axis == Axis.HEIGHT:
-                    pivot = [
-                        random.randrange(0,bin.width),
-                        random.randrange(0,bin.height),
-                        random.randrange(0,bin.depth)
-                    ]
-                elif axis == Axis.DEPTH:
-                    pivot = [
-                        random.randrange(0,bin.width),
-                        random.randrange(0,bin.height),
-                        random.randrange(0,bin.depth)
-                    ]
 
                 if bin.put_item(item, pivot):
                     fitted = True

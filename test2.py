@@ -1,73 +1,126 @@
-# OpenCV program to perform Edge detection in real time
-# import libraries of python OpenCV
-# where its functionality resides
 import cv2
-# np is an alias pointing to numpy library
+from object_detector import *
 import numpy as np
+from cv2 import aruco
 
+# Load Aruco detector
+parameters = cv2.aruco.DetectorParameters_create()
+aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
 
-# capture frames from a camera
-cap = cv2.VideoCapture(2)
+# Calibrate camera
+calib_data_path = "D:/3/P3/P3-e.DO-robot-arm/MultiMatrix.npz"
+calib_data = np.load(calib_data_path)
+print(calib_data.files)
+cam_mat = calib_data["camMatrix"]
+dist_coef = calib_data["distCoef"]
 
+# Load Object Detector
+detector = HomogeneousBgDetector()
 
-# loop runs if capturing has been initialized
-while(1):
+MARKER_SIZE = 3  # centimeters
 
-	# reads frames from a camera
-	ret, frame = cap.read()
+alld10 =[]
+alld11 =[]
 
-	# converting BGR to HSV
-	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-	operatedImage = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-	corners = cv2.goodFeaturesToTrack(operatedImage,25,0.01,10)
-	corners = np.int0(corners)
-	# modify the data type
-	# setting to 32-bit floating point
-	operatedImage = np.float32(operatedImage)
-	# apply the cv2.cornerHarris method
+# Load Cap
+cap = cv2.VideoCapture(1)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+counter = 0
 
-	# to detect the corners with appropriate
-	# values as input parameters
-	dest = cv2.cornerHarris(operatedImage, 2, 3, 0.01)
-	# Results are marked through the dilated corners
-	dest = cv2.dilate(dest, None)
-	
-	# Reverting back to the original image,
-	# with optimal threshold value
-	frame[dest > 0.01 * dest.max()]=[0, 0, 255]
-	
-	# the window showing output image with corners
-	cv2.imshow('Image with Borders', frame)
-	
-	# define range of red color in HSV
-	lower_red = np.array([30,150,50])
-	upper_red = np.array([255,255,180])
-	
-	# create a red HSV colour boundary and
-	# threshold HSV image
-	mask = cv2.inRange(hsv, lower_red, upper_red)
+while True:
+    _, img = cap.read()
+    counter += 1
+    # Get Aruco marker
+    corners, ids, _ = cv2.aruco.detectMarkers(img, aruco_dict, parameters=parameters)
+    if corners and len(corners) == 1:
 
-	# Bitwise-AND mask and original image
-	res = cv2.bitwise_and(frame,frame, mask= mask)
+        # Draw polygon around the marker
+        int_corners = np.int0(corners)
+        cv2.polylines(img, int_corners, True, (0, 255, 0), 5)
 
-	# Display an original image
-	cv2.imshow('Original',frame)
+        # Aruco Perimeter
+        aruco_perimeter = cv2.arcLength(corners[0], True)
 
-	# finds edges in the input image and
-	# marks them in the output map edges
-	edges = cv2.Canny(frame,200,200)
+        # Pixel to cm ratio
+        pixel_cm_ratio = aruco_perimeter / 20
 
-	# Display edges in a frame
-	cv2.imshow('Edges',edges)
+        contours = detector.detect_objects(img)
 
-	# Wait for Esc key to stop
-	k = cv2.waitKey(5) & 0xFF
-	if k == 27:
-		break
+        # Draw objects boundaries
+        for cnt in contours:
+            # Get rect
+            rect = cv2.minAreaRect(cnt)
+            (x, y), (w, h), angle = rect
 
+            # Get Width and Height of the Objects by applying the Ratio pixel to cm
+            object_width = w / pixel_cm_ratio
+            object_height = h / pixel_cm_ratio
 
-# Close the window
+            # Display rectangle
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+
+            cv2.circle(img, (int(x), int(y)), 5, (0, 0, 255), -1)
+            cv2.polylines(img, [box], True, (255, 0, 0), 2)
+            cv2.putText(img, "Width {} cm".format(round(object_width, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
+            cv2.putText(img, "Length {} cm".format(round(object_height, 1)), (int(x - 100), int(y + 15)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
+
+        print("Width: ", object_width, "Length: ", object_height) 
+
+    if counter >= 20:
+        break
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break  
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    marker_corners, marker_IDs, reject = cv2.aruco.detectMarkers(gray_frame, aruco_dict, parameters=parameters)
+    if marker_corners:
+        rVec, tVec, _ = aruco.estimatePoseSingleMarkers(marker_corners, MARKER_SIZE, cam_mat, dist_coef)
+        total_markers = range(0, marker_IDs.size)
+        for ids, corners, i in zip(marker_IDs, marker_corners, total_markers):
+            cv2.polylines(
+                frame, [corners.astype(np.int32)], True, (0, 0, 255), 4, cv2.LINE_AA
+            )
+            corners = corners.reshape(4, 2)
+            corners = corners.astype(int)
+            top_right = corners[0].ravel()
+            top_left = corners[1].ravel()
+            bottom_right = corners[2].ravel()
+            bottom_left = corners[3].ravel()
+
+            # Since there was mistake in calculating the distance approach point-outed in the Video Tutorial's comment
+            # so I have rectified that mistake, I have test that out it increase the accuracy overall.
+            # Calculating the distance
+            distance = np.sqrt(
+                tVec[i][0][2] ** 2 + tVec[i][0][0] ** 2 + tVec[i][0][1] ** 2
+            )
+            
+            # Draw the pose of the marker
+            cv2.putText(frame,f"id: {ids[0]} Dist: {round(distance, 2)}",top_right,cv2.FONT_HERSHEY_PLAIN,1.3,(0, 0, 255),2,cv2.LINE_AA,)
+            
+            if (ids == [10]):
+                #print(ids, distance)
+                alld10.append(distance)
+                #print(alld10)
+                avg10 = sum(alld10) / len(alld10)
+                #print("avarage distance for id 10 is: ", round(avg10,2))
+        
+            if (ids == [11]):
+                #print(ids, distance)
+                alld11.append(distance)
+                #print(alld11)
+                avg11 = sum(alld11) / len(alld11)
+                #print("avarage distance for id 11 is: ", round(avg11,2))
+            
+                hight = avg10 - avg11
+                print("Endleig højde", hight)
+
+    cv2.imshow("frame", frame)
+    key = cv2.waitKey(1)
+    if key == 27:
+        break    
 cap.release()
-
-# De-allocate any associated memory usage
 cv2.destroyAllWindows()

@@ -300,7 +300,7 @@ class Packer:
                         
                     print("TOTAL UNUSED VOLUME:\n", wastedSpace ,"\n")            
                            
-                    exit()
+                    return 0
                                 
                 # if some items where left unpacked:
                 # then we are not done! :D            
@@ -318,7 +318,7 @@ class Packer:
                                     ItemList.append(item)
                                     print("IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
                                     
-                            exit()
+                            return 0
                             
                         #reassign the missing items, in unfitted_items, to ItemList to be packed in a new bin:
                         for unfitted in BinList[pb].unfitted_items:
@@ -515,7 +515,7 @@ class Packer:
                         
                     print("TOTAL UNUSED VOLUME:\n", wastedSpace ,"\n")            
                            
-                    exit()
+                    return 0
                                 
                 # if some items where left unpacked:
                 # then we are not done! :D            
@@ -533,7 +533,7 @@ class Packer:
                                     ItemList.append(item)
                                     print("IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
                                     
-                            exit()
+                            return 0
                             
                         #reassign the missing items, in unfitted_items, to ItemList to be packed in a new bin:
                         for unfitted in BinList[pb].unfitted_items:

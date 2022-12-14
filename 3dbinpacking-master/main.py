@@ -275,27 +275,34 @@ class Packer:
                 # if no items where left unpacked:
                 # print result and solution:
                 if len(BinList[len(BinList)-1].unfitted_items) == 0 :
-                    print("ALL ITEMS PACKED: \n")
+                    print(" ALL ITEMS PACKED: \n")
                     
                     TotalWeight = 0
                     
                     ItemsTotalVolume = 0
                     
-                    BinTotalVolume = 0     
-                    print("AMOUNT OF BINS:", len(BinList))   
+                    wastedSpaceBin = 0
+                    
+                    BinTotalVolume = 0 
+                        
+                    print(" AMOUNT OF BINS:", len(BinList))   
                     for b in range(len(BinList)):
                         BinTotalVolume += BinList[b].get_volume()
-                        print(f"ITEMS PACKED IN BIN NUMBER {b+1}", BinList[b].string(),  ": \n")
+                        wastedSpaceBin = BinList[b].get_volume()
+                        print(f" ITEMS PACKED IN BIN NUMBER {b+1}", BinList[b].string(),  ": \n")
                         for item in BinList[b].items:
                             ItemsTotalVolume += item.get_volume()
                             TotalWeight += item.weight
-                            print("===>", item.string(),"\n")
-                            
-                        wastedSpace = BinTotalVolume - ItemsTotalVolume
+                            print(" ===>", item.string(),"\n")
+                            wastedSpaceBin -= item.get_volume()
+                        print(f"\n WASTED SPACE IN BIN NUMBER: {b+1} \n \n ===>", wastedSpaceBin, "\n\n\n") 
+                    wastedSpaceBin = 0    
                     
-                    print("TOTAL WEIGHT:\n", TotalWeight ,"\n")
+                    wastedSpace = BinTotalVolume - ItemsTotalVolume
+                    
+                    print(" TOTAL WEIGHT:\n \n ===>", TotalWeight ,"\n")
                         
-                    print("TOTAL UNUSED VOLUME:\n", wastedSpace ,"\n")            
+                    print(" TOTAL UNUSED VOLUME:\n \n ===>", wastedSpace ,"\n")            
                            
                     return 0
                                 
@@ -309,11 +316,11 @@ class Packer:
                         #if no remaining items could be packed in the biggest bin type:
                         #then we know that this items cannot fit into any bin type    
                         if len(BinList[len(BinList)-1].items) == 0:   
-                            print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
+                            print(" NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
                             
                             for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
-                                    print("IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
+                                    print(" IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
                                     
                             return 0
                             
@@ -465,27 +472,34 @@ class Packer:
                 # if no items where left unpacked:
                 # print result and solution:
                 if len(BinList[len(BinList)-1].unfitted_items) == 0 :
-                    print("ALL ITEMS PACKED: \n")
+                    print(" ALL ITEMS PACKED: \n")
                     
                     TotalWeight = 0
                     
                     ItemsTotalVolume = 0
                     
-                    BinTotalVolume = 0     
-                    print("AMOUNT OF BINS:", len(BinList))   
+                    wastedSpaceBin = 0
+                    
+                    BinTotalVolume = 0   
+                      
+                    print(" AMOUNT OF BINS:", len(BinList))   
                     for b in range(len(BinList)):
                         BinTotalVolume += BinList[b].get_volume()
-                        print(f"ITEMS PACKED IN BIN NUMBER {b+1}", BinList[b].string(),  ": \n")
+                        wastedSpaceBin = BinList[b].get_volume()
+                        print(f" ITEMS PACKED IN BIN NUMBER {b+1}", BinList[b].string(),  ": \n")
                         for item in BinList[b].items:
                             ItemsTotalVolume += item.get_volume()
                             TotalWeight += item.weight
-                            print("===>", item.string(),"\n")
-                            
-                        wastedSpace = BinTotalVolume - ItemsTotalVolume
+                            print(" ===>", item.string(),"\n")
+                            wastedSpaceBin -= item.get_volume()
+                        print(f"\n WASTED SPACE IN BIN NUMBER: {b+1} \n \n ===>", wastedSpaceBin, "\n\n\n") 
+                    wastedSpaceBin = 0    
                     
-                    print("TOTAL WEIGHT:\n", TotalWeight ,"\n")
+                    wastedSpace = BinTotalVolume - ItemsTotalVolume
+                    
+                    print(" TOTAL WEIGHT:\n \n ===>", TotalWeight ,"\n")
                         
-                    print("TOTAL UNUSED VOLUME:\n", wastedSpace ,"\n")            
+                    print(" TOTAL UNUSED VOLUME:\n \n ===>", wastedSpace ,"\n")            
                            
                     return 0
                                 
@@ -499,11 +513,11 @@ class Packer:
                         #if no remaining items could be packed in the biggest bin type:
                         #then we know that this items cannot fit into any bin type    
                         if len(BinList[len(BinList)-1].items) == 0:   
-                            print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
+                            print(" NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
                             
                             for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
-                                    print("IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
+                                    print(" IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
                                     
                             return 0
                             

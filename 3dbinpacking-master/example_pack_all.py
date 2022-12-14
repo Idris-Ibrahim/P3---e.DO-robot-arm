@@ -23,12 +23,19 @@ def add():
 
     # ADDING ITEMS TO BE PACKED:
 
-    packer.add_item(Item('Fugl', 10, 10, 7, 0.5))
+    packer.add_item(Item('Fugl', 10, 10, 7, 1))
     packer.add_item(Item('Hund', 20, 10, 20, 10))
-    packer.add_item(Item('Mus', 8, 5, 12, 0.5))
-    packer.add_item(Item('Rat', 8, 5, 12, 3))
-    packer.add_item(Item('Turtle', 5, 4, 15, 4))
+    packer.add_item(Item('Mus', 8, 5, 12, 3))
+    packer.add_item(Item('Rotte', 8, 5, 12, 3))
+    packer.add_item(Item('Skildpade', 5, 4, 15, 40))
     packer.add_item(Item('Anaconda', 10, 4, 4, 2))
+    packer.add_item(Item('Tiger', 20, 10, 23, 10))
+    packer.add_item(Item('Kat', 10, 5, 10, 13))
+    packer.add_item(Item('Orangotang', 15, 12, 14, 20))
+    packer.add_item(Item('Flagermus', 14, 5, 12, 2))
+    packer.add_item(Item('Nisse', 20, 10, 17, 50))
+    packer.add_item(Item('Mulvarp', 17, 13, 18, 7))
+    packer.add_item(Item('Bi', 1, 1, 1, 0.001))
 
 # CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
 

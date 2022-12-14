@@ -231,9 +231,6 @@ class Packer:
         # List for saving all packed bins:    
         BinList = []
         
-        #index for binlist
-        pb = 0
-        
         #list for saving volumes of all bins:
         VolumeBinList = []
         
@@ -271,13 +268,13 @@ class Packer:
                     self.pack_to_bin(self.bins[i], item)
                     
                 # Document the packed bin in BinList by creating a copy:
-                BinList.insert(pb, copy.deepcopy(self.bins[i]))   
+                BinList.append(copy.deepcopy(self.bins[i]))   
  
                 # Reset list of items to be packed:
                 ItemList.clear()
                 # if no items where left unpacked:
                 # print result and solution:
-                if len(BinList[pb].unfitted_items) == 0 :
+                if len(BinList[len(BinList)-1].unfitted_items) == 0 :
                     print("ALL ITEMS PACKED: \n")
                     
                     TotalWeight = 0
@@ -304,24 +301,24 @@ class Packer:
                                 
                 # if some items where left unpacked:
                 # then we are not done! :D            
-                if len(BinList[pb].unfitted_items) > 0 :
+                if len(BinList[len(BinList)-1].unfitted_items) > 0 :
 
                     # if there is no bigger bins to use:
                     if i+1 == len(self.bins):
                         
                         #if no remaining items could be packed in the biggest bin type:
                         #then we know that this items cannot fit into any bin type    
-                        if len(BinList[pb].items) == 0:   
+                        if len(BinList[len(BinList)-1].items) == 0:   
                             print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
                             
-                            for item in BinList[pb].unfitted_items:
+                            for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
                                     print("IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
                                     
                             return 0
                             
                         #reassign the missing items, in unfitted_items, to ItemList to be packed in a new bin:
-                        for unfitted in BinList[pb].unfitted_items:
+                        for unfitted in BinList[len(BinList)-1].unfitted_items:
                             unfitted.rotation_type = 0
                             ItemList.append(unfitted)
                             
@@ -330,29 +327,25 @@ class Packer:
                         #self.bins.unfitted_items must be cleared, else it will add dublicate items
                         self.bins[i].unfitted_items.clear()
                             
-                        BinList[pb].unfitted_items.clear()
+                        BinList[len(BinList)-1].unfitted_items.clear()
                         
-                        pb += 1 
-                            
                         continue
                         
                     # if using another bin of the same bin size result in less total bin volume than using the next bin:
                     # try packing remaining items in new bin (same bin type)
                     elif VolumeBinList[i] * M < VolumeBinList[i+1]:   
                             
-                        for unfitted in BinList[pb].unfitted_items:
+                        for unfitted in BinList[len(BinList)-1].unfitted_items:
                             unfitted.rotation_type = 0
                             ItemList.append(unfitted)
                         
                         #unfitted items have been      
-                        BinList[pb].unfitted_items.clear()
+                        BinList[len(BinList)-1].unfitted_items.clear()
                         
                         #self.bins.items has to be cleared before new items can fit in the given bin:
                         self.bins[i].items.clear()
                         #self.bins.unfitted_items must be cleared, else it will add dublicate items
                         self.bins[i].unfitted_items.clear()
-                                
-                        pb += 1
                         
                         M += 1
                         
@@ -370,8 +363,6 @@ class Packer:
                         BinList.clear()
                         
                         M = 2
-                            
-                        pb = 0
                         
                         #self.bins.items has to be cleared before new items can fit in the given bin:
                         self.bins[i].items.clear()
@@ -427,9 +418,6 @@ class Packer:
         # List for saving all packed bins:    
         BinList = []
         
-        #index for binlist
-        pb = 0
-        
         #list for saving volumes of all bins:
         VolumeBinList = []
         
@@ -470,13 +458,13 @@ class Packer:
                     self.pack_to_bin_random(self.bins[i], item)
                     
                 # Document the packed bin in BinList by creating a copy:
-                BinList.insert(pb, copy.deepcopy(self.bins[i]))   
+                BinList.append(copy.deepcopy(self.bins[i]))   
  
                 # Reset list of items to be packed:
                 ItemList.clear()
                 # if no items where left unpacked:
                 # print result and solution:
-                if len(BinList[pb].unfitted_items) == 0 :
+                if len(BinList[len(BinList)-1].unfitted_items) == 0 :
                     print("ALL ITEMS PACKED: \n")
                     
                     TotalWeight = 0
@@ -503,24 +491,24 @@ class Packer:
                                 
                 # if some items where left unpacked:
                 # then we are not done! :D            
-                if len(BinList[pb].unfitted_items) > 0 :
+                if len(BinList[len(BinList)-1].unfitted_items) > 0 :
 
                     # if there is no bigger bins to use:
                     if i+1 == len(self.bins):
                         
                         #if no remaining items could be packed in the biggest bin type:
                         #then we know that this items cannot fit into any bin type    
-                        if len(BinList[pb].items) == 0:   
+                        if len(BinList[len(BinList)-1].items) == 0:   
                             print("NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
                             
-                            for item in BinList[pb].unfitted_items:
+                            for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
                                     print("IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
                                     
                             return 0
                             
                         #reassign the missing items, in unfitted_items, to ItemList to be packed in a new bin:
-                        for unfitted in BinList[pb].unfitted_items:
+                        for unfitted in BinList[len(BinList)-1].unfitted_items:
                             unfitted.rotation_type = 0
                             ItemList.append(unfitted)
                             
@@ -529,9 +517,7 @@ class Packer:
                         #self.bins.unfitted_items must be cleared, else it will add dublicate items
                         self.bins[i].unfitted_items.clear()
                             
-                        BinList[pb].unfitted_items.clear()
-                        
-                        pb += 1 
+                        BinList[len(BinList)-1].unfitted_items.clear()
                             
                         continue
                         
@@ -539,19 +525,17 @@ class Packer:
                     # try packing remaining items in new bin (same bin type)
                     elif VolumeBinList[i] * M < VolumeBinList[i+1]:   
                             
-                        for unfitted in BinList[pb].unfitted_items:
+                        for unfitted in BinList[len(BinList)-1].unfitted_items:
                             unfitted.rotation_type = 0
                             ItemList.append(unfitted)
                         
                         #unfitted items have been      
-                        BinList[pb].unfitted_items.clear()
+                        BinList[len(BinList)-1].unfitted_items.clear()
                         
                         #self.bins.items has to be cleared before new items can fit in the given bin:
                         self.bins[i].items.clear()
                         #self.bins.unfitted_items must be cleared, else it will add dublicate items
                         self.bins[i].unfitted_items.clear()
-                                
-                        pb += 1
                         
                         M += 1
                         
@@ -569,8 +553,6 @@ class Packer:
                         BinList.clear()
                         
                         M = 2
-                            
-                        pb = 0
                         
                         #self.bins.items has to be cleared before new items can fit in the given bin:
                         self.bins[i].items.clear()

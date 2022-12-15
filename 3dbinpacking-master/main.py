@@ -231,9 +231,6 @@ class Packer:
         # List for saving all packed bins:    
         BinList = []
         
-        #list for saving volumes of all bins:
-        VolumeBinList = []
-        
         # List for saving all items to be processed:
         ItemList = []
         
@@ -249,10 +246,6 @@ class Packer:
         
         # sorts items in order from biggest to smallest:
         self.items = sorted(self.items, key=lambda item: item.get_volume(), reverse=True)
-        
-        #Saving all bin volumes:
-        for bin in self.bins:
-            VolumeBinList.append(bin.get_volume())
         
         # checking for each bin type, starting with the smallest:
         for i in range(len(self.bins)):
@@ -340,7 +333,7 @@ class Packer:
                         
                     # if using another bin of the same bin size result in less total bin volume than using the next bin:
                     # try packing remaining items in new bin (same bin type)
-                    elif VolumeBinList[i] * M < VolumeBinList[i+1]:   
+                    elif self.bins[i].get_volume() * M < self.bins[i+1].get_volume():   
                             
                         for unfitted in BinList[len(BinList)-1].unfitted_items:
                             unfitted.rotation_type = 0
@@ -360,7 +353,7 @@ class Packer:
                         
                     # if using another bin of the same bin size result in more total bin volume than using the next bin:
                     # try packing all items in new bin (bigger bin type)
-                    elif VolumeBinList[i] * M >= VolumeBinList[i+1]:
+                    elif self.bins[i].get_volume() * M >= self.bins[i+1].get_volume():
                             
                         for item in self.items:
                             if item not in ItemList:
@@ -425,9 +418,6 @@ class Packer:
         # List for saving all packed bins:    
         BinList = []
         
-        #list for saving volumes of all bins:
-        VolumeBinList = []
-        
         # List for saving all items to be processed:
         ItemList = []
         
@@ -438,18 +428,11 @@ class Packer:
         # Multiplier variable for testing if next bin is bigger than adding a new bin:
         M = 2
         
-        # randomize the order of bins to be used   
-        # random.shuffle(self.bins)
-        
         # sorts bins in order from smallest to biggest:    
         self.bins = sorted(self.bins, key=lambda bin: bin.get_volume())
         
-        # randomize the order of items to be packed
+        # sorts items in order from biggest to smallest:
         random.shuffle(self.items)
-        
-        #Saving all bin volumes:
-        for bin in self.bins:
-            VolumeBinList.append(bin.get_volume())
         
         # checking for each bin type, starting with the smallest:
         for i in range(len(self.bins)):
@@ -480,8 +463,8 @@ class Packer:
                     
                     wastedSpaceBin = 0
                     
-                    BinTotalVolume = 0   
-                      
+                    BinTotalVolume = 0 
+                        
                     print(" AMOUNT OF BINS:", len(BinList))   
                     for b in range(len(BinList)):
                         BinTotalVolume += BinList[b].get_volume()
@@ -532,12 +515,12 @@ class Packer:
                         self.bins[i].unfitted_items.clear()
                             
                         BinList[len(BinList)-1].unfitted_items.clear()
-                            
+                        
                         continue
                         
                     # if using another bin of the same bin size result in less total bin volume than using the next bin:
                     # try packing remaining items in new bin (same bin type)
-                    elif VolumeBinList[i] * M < VolumeBinList[i+1]:   
+                    elif self.bins[i].get_volume() * M < self.bins[i+1].get_volume():   
                             
                         for unfitted in BinList[len(BinList)-1].unfitted_items:
                             unfitted.rotation_type = 0
@@ -557,7 +540,7 @@ class Packer:
                         
                     # if using another bin of the same bin size result in more total bin volume than using the next bin:
                     # try packing all items in new bin (bigger bin type)
-                    elif VolumeBinList[i] * M >= VolumeBinList[i+1]:
+                    elif self.bins[i].get_volume() * M >= self.bins[i+1].get_volume():
                             
                         for item in self.items:
                             if item not in ItemList:

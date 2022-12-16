@@ -48,11 +48,11 @@ def add_random(RandomBins = [], RandomItems = []):
     
     # Random 5 types of Bins:
     
-    packer.add_bin(Bin('BIN 1', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 2', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 3', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 4', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 5', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 1', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 2', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 3', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 4', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 5', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
 
     # ADDING ITEMS TO BE PACKED:
 

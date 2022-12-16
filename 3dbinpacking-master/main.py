@@ -317,10 +317,10 @@ class Packer:
                         #then we know that this items cannot fit into any bin type    
                         if len(BinList[len(BinList)-1].items) == 0:   
                             print(" NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
-                            
+                            print(" IMPOSSIBLE ITEMS: \n")
                             for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
-                                    print(" IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
+                                    print(" ====>", item.string(),"\n")     
                                     
                             return 0
                             
@@ -515,9 +515,10 @@ class Packer:
                         if len(BinList[len(BinList)-1].items) == 0:   
                             print(" NOT ALL ITEMS COULD BE PACKED IN THE GIVEN BIN TYPES")
                             
+                            print(" IMPOSSIBLE ITEMS: \n")
                             for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
-                                    print(" IMPOSSIBLE ITEMS: \n====>", item.string(),"\n")     
+                                    print(" ====>", item.string(),"\n")     
                                     
                             return 0
                             

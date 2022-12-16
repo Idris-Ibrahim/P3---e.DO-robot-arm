@@ -1,5 +1,5 @@
 from main import Packer, Bin, Item
-
+import random
 # IMPORTING THE PACKER OBJECT
 packer = Packer()
 
@@ -37,18 +37,78 @@ def add():
     packer.add_item(Item('Mulvarp', 17, 13, 18, 7))
     packer.add_item(Item('Bi', 1, 1, 1, 0.001))
 
-# CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+def add_random(RandomBins = [], RandomItems = []):
+    
+    # ADDING BINS TYPES FOR THE ALGORITHMS DISPOSAL:
+    # packer.add_bin(Bin('SMALL BIN', float(25), float(10), float(12), float(10)))
+    # packer.add_bin(Bin('DOUBLE - SMALL BIN', float(50), float(20), float(50), float(30)))
+    # packer.add_bin(Bin('MEDIUM BIN', float(100), float(50), float(70), float(80)))
+    # packer.add_bin(Bin('BIG BIN', float(100), float(100), float(100), float(150)))
+    # packer.add_bin(Bin('HUGE BIN', float(100), float(100), float(200), float(200)))
+    
+    # Random 5 types of Bins:
+    
+    packer.add_bin(Bin('BIN 1', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 2', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 3', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 4', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 5', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 200)))
 
-add()
-print("\n PACK ALL PIVOTING: \n")
+    # ADDING ITEMS TO BE PACKED:
+
+    packer.add_item(Item('ITEM 1', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 2', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 3', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 4', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 5', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 6', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 7', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 8', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 9', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 10', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 11', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 12', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    
+    for bin in packer.bins:
+        RandomBins.append(bin)
+        
+    for item in packer.items:
+        RandomItems.append(item)
+        
+def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
+    
+    for bin in RanBinList:
+        packer.add_bin(bin)
+
+    for item in RanItemList:
+        packer.add_item(item)
+    
+
+RandomBins = []
+
+RandomItems = []
+
+add_random(RandomBins, RandomItems)
+
 packer.pack_all_items()
-print("\n ^ PACK ALL PIVOTING: ^\n")
 
 clear_packer(packer)
 
-# CALLING PACK_ALL_ITEMS_RANDOM FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+insert_same_random_into_packer(RandomItems, RandomBins)
 
-add()
-print("\n PACK ALL RANDOM: \n")
 packer.pack_all_items_random()
-print("\n ^ PACK ALL RANDOM: ^\n")
+
+# # CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+# add()
+# print("\n PACK ALL PIVOTING: \n")
+# packer.pack_all_items()
+# print("\n ^ PACK ALL PIVOTING: ^\n")
+
+# clear_packer(packer)
+
+# # CALLING PACK_ALL_ITEMS_RANDOM FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+
+# add()
+# print("\n PACK ALL RANDOM: \n")
+# packer.pack_all_items_random()
+# print("\n ^ PACK ALL RANDOM: ^\n")

@@ -1,15 +1,55 @@
+# import matplotlib.pyplot as plt
+
+
+# # Create a list of numerical data
+# data1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# data2 = [1, 2, 3, 4, 5, 6, 7]
+# # Create a box plot using the boxplot function
+# plt.boxplot([data1, data2], vert =False)
+
+# # Add a title and label the axes
+# plt.title("Box Plot of Numerical Data")
+# plt.xlabel("values")
+# plt.ylabel("Data")
+
+# # Display the plot
+# plt.show()
+
 import matplotlib.pyplot as plt
 
-# Create a list of numerical data
-data1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-data2 = [1, 2, 3, 4, 5, 6, 7]
-# Create a box plot using the boxplot function
-plt.boxplot([data1, data2], vert =False)
+# Open the first file in read mode
+with open('tests/erick_dube_test.txt', 'r') as file:
+  # Read all lines in the file
+  lines = file.readlines()
 
-# Add a title and label the axes
-plt.title("Box Plot of Numerical Data")
-plt.xlabel("values")
-plt.ylabel("Data")
+# Create an empty list for the first set of values
+erick_dube_results = []
 
-# Display the plot
+# Iterate over the lines in the file
+for line in lines:
+  # Strip leading and trailing whitespace from the line
+  line = line.strip()
+  # Append the value to the list
+  erick_dube_results.append(float(line))
+
+# Open the second file in read mode
+with open('tests/random_test.txt', 'r') as file:
+  # Read all lines in the file
+  lines = file.readlines()
+
+# Create an empty list for the second set of values
+random_results = []
+
+# Iterate over the lines in the file
+for line in lines:
+  # Strip leading and trailing whitespace from the line
+  line = line.strip()
+  # Append the value to the list
+  random_results.append(float(line))
+
+# Create a boxplot comparing the two sets of values
+plt.boxplot([erick_dube_results, random_results], vert = False, labels= ["Our Algorithm", "Random Algorithm"])
+plt.title("Boxplot of algorithm retults")
+plt.xlabel("% wasted space per order")
+plt.grid()
 plt.show()

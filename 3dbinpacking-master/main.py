@@ -298,7 +298,7 @@ class Packer:
                     ResultsList.append(wastedSpaceRatio)
                     
                     # open a file for writing
-                    with open('erick_dube_test.txt', 'a') as f:
+                    with open('tests/erick_dube_test.txt', 'a') as f:
                         # write each number to the file, followed by a newline character
                         for result in ResultsList:
                             f.write(str(result) + '\n')        
@@ -492,7 +492,7 @@ class Packer:
                     ResultsList.append(wastedSpaceRatio)
                     
                     # open a file for writing
-                    with open('random_test.txt', 'a') as f:
+                    with open('tests/random_test.txt', 'a') as f:
                         # write each number to the file, followed by a newline character
                         for result in ResultsList:
                             f.write(str(result) + '\n') 

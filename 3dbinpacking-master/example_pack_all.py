@@ -37,7 +37,7 @@ def add():
     packer.add_item(Item('Mulvarp', 17, 13, 18, 7))
     packer.add_item(Item('Bi', 1, 1, 1, 0.001))
 
-def add_random(RandomBins = [], RandomItems = []):
+def add_random(RandomBins, RandomItems):
     
     # ADDING BINS TYPES FOR THE ALGORITHMS DISPOSAL:
     # packer.add_bin(Bin('SMALL BIN', float(25), float(10), float(12), float(10)))
@@ -48,26 +48,26 @@ def add_random(RandomBins = [], RandomItems = []):
     
     # Random 5 types of Bins:
     
-    packer.add_bin(Bin('BIN 1', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 2', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 3', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 4', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
-    packer.add_bin(Bin('BIN 5', random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200), random.uniform(0, 200)))
+    packer.add_bin(Bin('BIN 1', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
+    packer.add_bin(Bin('BIN 2', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
+    packer.add_bin(Bin('BIN 3', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
+    packer.add_bin(Bin('BIN 4', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
+    packer.add_bin(Bin('BIN 5', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
 
     # ADDING ITEMS TO BE PACKED:
 
-    packer.add_item(Item('ITEM 1', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 2', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 3', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 4', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 5', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 6', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 7', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 8', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 9', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 10', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 11', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
-    packer.add_item(Item('ITEM 12', random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 100), random.uniform(0, 12.5)))
+    packer.add_item(Item('ITEM 1', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 2', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 3', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 4', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 5', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 6', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 7', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 8', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 9', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 10', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 11', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    packer.add_item(Item('ITEM 12', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
     
     for bin in packer.bins:
         RandomBins.append(bin)
@@ -82,22 +82,28 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
 
     for item in RanItemList:
         packer.add_item(item)
+ 
+for i in range(1000000000):
+        
+    RandomBins = []
+
+    RandomItems = []
+
+    Results_erick_dube = []
+
+    Results_random = []
+
+    add_random(RandomBins, RandomItems)
+
+    packer.pack_all_items(Results_erick_dube)
+
+    clear_packer(packer)
+
+    insert_same_random_into_packer(RandomBins, RandomItems)
+
+    packer.pack_all_items_random(Results_random)
     
-
-RandomBins = []
-
-RandomItems = []
-
-add_random(RandomBins, RandomItems)
-
-packer.pack_all_items()
-
-clear_packer(packer)
-
-insert_same_random_into_packer(RandomItems, RandomBins)
-
-packer.pack_all_items_random()
-
+    clear_packer(packer)    
 # # CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
 # add()
 # print("\n PACK ALL PIVOTING: \n")

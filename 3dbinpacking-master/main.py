@@ -2,6 +2,7 @@ from constants import RotationType, Axis
 from auxiliary_methods import intersect, set_to_decimal
 import copy
 import random
+from decimal import Decimal
 
 DEFAULT_NUMBER_OF_DECIMALS = 3
 START_POSITION = [0, 0, 0]
@@ -90,7 +91,7 @@ class Bin:
         for item in self.items:
             total_weight += item.weight
 
-        return set_to_decimal(total_weight, self.number_of_decimals)
+        return round(total_weight, 3)
 
     def put_item(self, item, pivot):
         fit = False
@@ -218,15 +219,8 @@ class Packer:
                     self.items.remove(item)
     
     def pack_all_items(
-        self, number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS
+        self, ResultsList
     ):
-        # number formatting:
-        for bin in self.bins:
-            bin.format_numbers(number_of_decimals)
-
-        # number formatting:
-        for item in self.items:
-            item.format_numbers(number_of_decimals)
         
         # List for saving all packed bins:    
         BinList = []
@@ -288,14 +282,26 @@ class Packer:
                             TotalWeight += item.weight
                             print(" ===>", item.string(),"\n")
                             wastedSpaceBin -= item.get_volume()
-                        print(f"\n WASTED SPACE IN BIN NUMBER: {b+1} \n \n ===>", wastedSpaceBin, "\n\n\n") 
+                        print(f"\n UNUSED VOLUME IN BIN NUMBER: {b+1} \n \n ===>", wastedSpaceBin, "\n\n\n") 
                     wastedSpaceBin = 0    
                     
                     wastedSpace = BinTotalVolume - ItemsTotalVolume
                     
                     print(" TOTAL WEIGHT:\n \n ===>", TotalWeight ,"\n")
                         
-                    print(" TOTAL UNUSED VOLUME:\n \n ===>", wastedSpace ,"\n")            
+                    print(" TOTAL UNUSED VOLUME:\n \n ===>", wastedSpace ,"\n")
+                    
+                    wastedSpaceRatio = (wastedSpace / BinTotalVolume) * 100
+                    
+                    print("Wasted Space %: \n ===>", wastedSpaceRatio, "\n")
+                    
+                    ResultsList.append(wastedSpaceRatio)
+                    
+                    # open a file for writing
+                    with open('erick_dube_test.txt', 'a') as f:
+                        # write each number to the file, followed by a newline character
+                        for result in ResultsList:
+                            f.write(str(result) + '\n')        
                            
                     return 0
                                 
@@ -391,9 +397,11 @@ class Packer:
 
             #randomizes pivot for each item:
             for ib in items_in_bin:
-                pivot = [random.randrange(0,bin.width),
-                         random.randrange(0,bin.height), 
-                         random.randrange(0,bin.depth)]
+                x = round(random.uniform(0,bin.width), 3)
+                y = round(random.uniform(0,bin.height), 3)
+                z = round(random.uniform(0,bin.depth), 3)
+                
+                pivot = [x, y, z]
 
                 if bin.put_item(item, pivot):
                     fitted = True
@@ -405,15 +413,8 @@ class Packer:
             bin.unfitted_items.append(item)
 
     def pack_all_items_random(
-        self, number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS
+        self, ResultsList
     ):
-        # number formatting:
-        for bin in self.bins:
-            bin.format_numbers(number_of_decimals)
-
-        # number formatting:
-        for item in self.items:
-            item.format_numbers(number_of_decimals)
         
         # List for saving all packed bins:    
         BinList = []
@@ -475,7 +476,7 @@ class Packer:
                             TotalWeight += item.weight
                             print(" ===>", item.string(),"\n")
                             wastedSpaceBin -= item.get_volume()
-                        print(f"\n WASTED SPACE IN BIN NUMBER: {b+1} \n \n ===>", wastedSpaceBin, "\n\n\n") 
+                        print(f"\n UNUSED VOLUME IN BIN NUMBER: {b+1} \n \n ===>", wastedSpaceBin, "\n\n\n") 
                     wastedSpaceBin = 0    
                     
                     wastedSpace = BinTotalVolume - ItemsTotalVolume
@@ -483,6 +484,18 @@ class Packer:
                     print(" TOTAL WEIGHT:\n \n ===>", TotalWeight ,"\n")
                         
                     print(" TOTAL UNUSED VOLUME:\n \n ===>", wastedSpace ,"\n")            
+                    
+                    wastedSpaceRatio = (wastedSpace / BinTotalVolume) * 100
+                    
+                    print("Wasted Space %: \n ===>", wastedSpaceRatio, "\n")
+                    
+                    ResultsList.append(wastedSpaceRatio)
+                    
+                    # open a file for writing
+                    with open('random_test.txt', 'a') as f:
+                        # write each number to the file, followed by a newline character
+                        for result in ResultsList:
+                            f.write(str(result) + '\n') 
                            
                     return 0
                                 

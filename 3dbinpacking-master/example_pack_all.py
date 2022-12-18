@@ -82,28 +82,30 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
 
     for item in RanItemList:
         packer.add_item(item)
- 
-for i in range(1000000000):
+
+for j in range(1000):
+    for i in range(100):
+            
+        RandomBins = []
+
+        RandomItems = []
+
+        Results_erick_dube = []
+
+        Results_random = []
+
+        add_random(RandomBins, RandomItems)
+
+        packer.pack_all_items(Results_erick_dube)
+
+        clear_packer(packer)
+
+        insert_same_random_into_packer(RandomBins, RandomItems)
+
+        packer.pack_all_items_random(Results_random)
         
-    RandomBins = []
-
-    RandomItems = []
-
-    Results_erick_dube = []
-
-    Results_random = []
-
-    add_random(RandomBins, RandomItems)
-
-    packer.pack_all_items(Results_erick_dube)
-
-    clear_packer(packer)
-
-    insert_same_random_into_packer(RandomBins, RandomItems)
-
-    packer.pack_all_items_random(Results_random)
-    
-    clear_packer(packer)    
+        clear_packer(packer)   
+         
 # # CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
 # add()
 # print("\n PACK ALL PIVOTING: \n")

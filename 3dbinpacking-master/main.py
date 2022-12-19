@@ -298,10 +298,18 @@ class Packer:
                     ResultsList.append(wastedSpaceRatio)
                     
                     # open a file for writing
-                    with open('tests/erick_dube_test.txt', 'a') as f:
+                    with open('tests/Mcheck_test.txt', 'a') as f:
                         # write each number to the file, followed by a newline character
                         for result in ResultsList:
-                            f.write(str(result) + '\n')        
+                            f.write(str(result) + '\n')  
+                            
+                    Bins = len(BinList)   
+                    
+                    # open a file for writing
+                    with open('tests/Mcheck_bins.txt', 'a') as f:
+                        # write each number to the file, followed by a newline character
+                        for result in ResultsList:
+                            f.write(str(Bins) + '\n')   
                            
                     return 0
                                 
@@ -383,31 +391,14 @@ class Packer:
 
     def pack_to_bin_random(self, bin, item):
         fitted = False
+        
+        Randompivot = [
+                round(random.uniform(0,bin.width), 3),
+                round(random.uniform(0,bin.height), 3),
+                round(random.uniform(0,bin.depth), 3)]
 
-        if not bin.items:
-            response = bin.put_item(item, START_POSITION)
-
-            if not response:
-                bin.unfitted_items.append(item)
-
-            return
-
-        for axis in range(0, 3):
-            items_in_bin = bin.items
-
-            #randomizes pivot for each item:
-            for ib in items_in_bin:
-                x = round(random.uniform(0,bin.width), 3)
-                y = round(random.uniform(0,bin.height), 3)
-                z = round(random.uniform(0,bin.depth), 3)
-                
-                pivot = [x, y, z]
-
-                if bin.put_item(item, pivot):
-                    fitted = True
-                    break
-            if fitted:
-                break
+        if bin.put_item(item, Randompivot):
+            fitted = True
 
         if not fitted:
             bin.unfitted_items.append(item)
@@ -496,6 +487,14 @@ class Packer:
                         # write each number to the file, followed by a newline character
                         for result in ResultsList:
                             f.write(str(result) + '\n') 
+                            
+                    Bins = len(BinList)   
+                    
+                    # open a file for writing
+                    with open('tests/random_bins.txt', 'a') as f:
+                        # write each number to the file, followed by a newline character
+                        for result in ResultsList:
+                            f.write(str(Bins) + '\n') 
                            
                     return 0
                                 
@@ -653,11 +652,19 @@ class Packer:
                         ResultsList.append(wastedSpaceRatio)
                         
                          # open a file for writing
-                        with open('tests/erick_dube_test_small.txt', 'a') as f:
+                        with open('tests/small_test.txt', 'a') as f:
                              # write each number to the file, followed by a newline character
                              for result in ResultsList:
                                  f.write(str(result) + '\n')        
-                            
+                        
+                        Bins = len(BinList)   
+                    
+                        # open a file for writing
+                        with open('tests/small_bins.txt', 'a') as f:
+                            # write each number to the file, followed by a newline character
+                            for result in ResultsList:
+                                f.write(str(Bins) + '\n')   
+                                  
                         return 0
                                     
                     # if some items where left unpacked:

@@ -18,22 +18,22 @@
 import matplotlib.pyplot as plt
 
 # Open the first file in read mode
-with open('tests/erick_dube_test.txt', 'r') as file:
+with open('tests/Mcheck_bins.txt', 'r') as file:
   # Read all lines in the file
   lines = file.readlines()
 
 # Create an empty list for the first set of values
-erick_dube_results = []
+Mcheck_results = []
 
 # Iterate over the lines in the file
 for line in lines:
   # Strip leading and trailing whitespace from the line
   line = line.strip()
   # Append the value to the list
-  erick_dube_results.append(float(line))
+  Mcheck_results.append(float(line))
 
 # Open the second file in read mode
-with open('tests/random_test.txt', 'r') as file:
+with open('tests/random_bins.txt', 'r') as file:
   # Read all lines in the file
   lines = file.readlines()
 
@@ -48,7 +48,7 @@ for line in lines:
   random_results.append(float(line))
   
 # Open the second file in read mode
-with open('tests/erick_dube_test_small.txt', 'r') as file:
+with open('tests/small_bins.txt', 'r') as file:
   # Read all lines in the file
   lines = file.readlines()
 
@@ -63,8 +63,8 @@ for line in lines:
   small_results.append(float(line))
 
 # Create a boxplot comparing the two sets of values
-plt.boxplot([erick_dube_results, random_results, small_results], vert = False, labels= ["Our Algorithm", "Random Algorithm", "Small Algorithm"])
+plt.boxplot([random_results, small_results, Mcheck_results], vert = False, labels= ["Random Algorithm", "Small Algorithm", "Mcheck Algorithm"])
 plt.title("Boxplot of algorithm retults")
-plt.xlabel("% wasted space per order")
+plt.xlabel("Amount of bins used per order")
 plt.grid()
 plt.show()

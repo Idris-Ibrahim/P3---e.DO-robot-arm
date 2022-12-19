@@ -46,29 +46,20 @@ def add_random(RandomBins, RandomItems):
     # packer.add_bin(Bin('BIG BIN', float(100), float(100), float(100), float(150)))
     # packer.add_bin(Bin('HUGE BIN', float(100), float(100), float(200), float(200)))
     
-    # Random 5 types of Bins:
+    # Random 1-10 types of Bins:
     
-    packer.add_bin(Bin('BIN 1', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
-    packer.add_bin(Bin('BIN 2', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
-    packer.add_bin(Bin('BIN 3', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
-    packer.add_bin(Bin('BIN 4', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
-    packer.add_bin(Bin('BIN 5', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
-
-    # ADDING ITEMS TO BE PACKED:
-
-    packer.add_item(Item('ITEM 1', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 2', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 3', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 4', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 5', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 6', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 7', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 8', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 9', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 10', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 11', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
-    packer.add_item(Item('ITEM 12', round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 100), 3), round(random.uniform(0, 20), 3)))
+    bin = random.randrange(1, 10)
+    item = random.randrange(1, 20)
     
+    # ADDING BINS TO PAKER
+    for i in range(bin):
+        packer.add_bin(Bin(f'BIN {i}', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
+    
+
+    # ADDING ITEMS TO BE PACKER:
+    for i in range(item):
+        packer.add_item(Item(f'ITEM {i}', round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3), round(random.uniform(0, 20), 3)))
+        
     for bin in packer.bins:
         RandomBins.append(bin)
         
@@ -83,8 +74,8 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
     for item in RanItemList:
         packer.add_item(item)
 
-for j in range(10):
-    for i in range(100):
+for j in range(100):
+    for i in range(1000):
             
         RandomBins = []
 

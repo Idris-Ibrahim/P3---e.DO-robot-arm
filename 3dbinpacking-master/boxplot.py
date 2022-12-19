@@ -46,9 +46,24 @@ for line in lines:
   line = line.strip()
   # Append the value to the list
   random_results.append(float(line))
+  
+# Open the second file in read mode
+with open('tests/erick_dube_test_small.txt', 'r') as file:
+  # Read all lines in the file
+  lines = file.readlines()
+
+# Create an empty list for the second set of values
+small_results = []
+
+# Iterate over the lines in the file
+for line in lines:
+  # Strip leading and trailing whitespace from the line
+  line = line.strip()
+  # Append the value to the list
+  small_results.append(float(line))
 
 # Create a boxplot comparing the two sets of values
-plt.boxplot([erick_dube_results, random_results], vert = False, labels= ["Our Algorithm", "Random Algorithm"])
+plt.boxplot([erick_dube_results, random_results, small_results], vert = False, labels= ["Our Algorithm", "Random Algorithm", "Small Algorithm"])
 plt.title("Boxplot of algorithm retults")
 plt.xlabel("% wasted space per order")
 plt.grid()

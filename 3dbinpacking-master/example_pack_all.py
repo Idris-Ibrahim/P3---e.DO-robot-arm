@@ -83,7 +83,7 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
     for item in RanItemList:
         packer.add_item(item)
 
-for j in range(1000):
+for j in range(10):
     for i in range(100):
             
         RandomBins = []
@@ -93,6 +93,8 @@ for j in range(1000):
         Results_erick_dube = []
 
         Results_random = []
+        
+        Results_small = []
 
         add_random(RandomBins, RandomItems)
 
@@ -105,11 +107,21 @@ for j in range(1000):
         packer.pack_all_items_random(Results_random)
         
         clear_packer(packer)   
+        
+        insert_same_random_into_packer(RandomBins, RandomItems)
+
+        packer.pack_all_items_small(Results_random)
+        
+        clear_packer(packer)
          
-# # CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+# CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+
+# list1 = []
+# list2 = []
+
 # add()
 # print("\n PACK ALL PIVOTING: \n")
-# packer.pack_all_items()
+# packer.pack_all_items(list1)
 # print("\n ^ PACK ALL PIVOTING: ^\n")
 
 # clear_packer(packer)
@@ -118,5 +130,15 @@ for j in range(1000):
 
 # add()
 # print("\n PACK ALL RANDOM: \n")
-# packer.pack_all_items_random()
+# packer.pack_all_items_random(list2)
 # print("\n ^ PACK ALL RANDOM: ^\n")
+
+# clear_packer(packer)
+
+# # CALLING PACK_ALL_ITEMS_SMALL FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
+# add()
+# print("\n PACK ALL SMALL BINS: \n")
+# packer.pack_all_items_small()
+# print("\n ^ PACK ALL SMALL BINS: ^\n")
+
+# clear_packer(packer)

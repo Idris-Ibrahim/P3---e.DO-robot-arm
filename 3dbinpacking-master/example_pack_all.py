@@ -77,8 +77,8 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
     for item in RanItemList:
         packer.add_item(item)
 
-for j in range(10):
-    for i in range(10):
+for j in range(100):
+    for i in range(100):
             
         RandomBins = []
 

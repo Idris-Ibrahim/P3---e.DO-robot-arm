@@ -328,6 +328,21 @@ class Packer:
                             for item in BinList[len(BinList)-1].unfitted_items:
                                     ItemList.append(item)
                                     print(" ====>", item.string(),"\n")     
+                            
+                            # open a file for writing
+                            with open('tests/Mcheck_test.txt', 'a') as f:
+                                # write each number to the file, followed by a newline character
+                                for result in ResultsList:
+                                    f.write(str("100") + '\n')  
+                                    
+                            Bins = len(self.bins)   
+                            
+                            # open a file for writing
+                            with open('tests/Mcheck_bins.txt', 'a') as f:
+                                # write each number to the file, followed by a newline character
+                                for result in ResultsList:
+                                    f.write(str(Bins) + '\n')   
+                           
                                     
                             return 0
                             
@@ -515,6 +530,21 @@ class Packer:
                                     ItemList.append(item)
                                     print(" ====>", item.string(),"\n")     
                                     
+                            # open a file for writing
+                            with open('tests/random_test.txt', 'a') as f:
+                                # write each number to the file, followed by a newline character
+                                for result in ResultsList:
+                                    f.write(str("100") + '\n')  
+                                    
+                            Bins = len(self.bins)   
+                            
+                            # open a file for writing
+                            with open('tests/random_bins.txt', 'a') as f:
+                                # write each number to the file, followed by a newline character
+                                for result in ResultsList:
+                                    f.write(str(Bins) + '\n')   
+                           
+                                    
                             return 0
                             
                         #reassign the missing items, in unfitted_items, to ItemList to be packed in a new bin:
@@ -682,6 +712,21 @@ class Packer:
                                     print("IMPOSSIBLE ITEMS")
                                     ItemList.append(item)
                                     print(" ====>", item.string(),"\n")     
+                                        
+                                # open a file for writing
+                                with open('tests/small_test.txt', 'a') as f:
+                                    # write each number to the file, followed by a newline character
+                                    for result in ResultsList:
+                                        f.write(str("100") + '\n')  
+                                        
+                                Bins = len(self.bins)   
+                                
+                                # open a file for writing
+                                with open('tests/small_bins.txt', 'a') as f:
+                                    # write each number to the file, followed by a newline character
+                                    for result in ResultsList:
+                                        f.write(str(Bins) + '\n')   
+                            
                                         
                                 return 0
                             

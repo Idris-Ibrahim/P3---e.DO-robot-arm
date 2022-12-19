@@ -48,17 +48,20 @@ def add_random(RandomBins, RandomItems):
     
     # Random 1-10 types of Bins:
     
-    bin = random.randrange(1, 10)
-    item = random.randrange(1, 20)
+    item = random.randrange(1, 40)
     
     # ADDING BINS TO PAKER
-    for i in range(bin):
-        packer.add_bin(Bin(f'BIN {i}', round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3), round(random.uniform(0, 200), 3)))
+    
+    packer.add_bin(Bin(f'BIN 1', round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3)))
+    packer.add_bin(Bin(f'BIN 2', round(random.uniform(50, 100), 3), round(random.uniform(50, 100), 3), round(random.uniform(50, 100), 3), round(random.uniform(50, 100), 3)))
+    packer.add_bin(Bin(f'BIN 3', round(random.uniform(100, 150), 3), round(random.uniform(100, 150), 3), round(random.uniform(100, 150), 3), round(random.uniform(100, 150), 3)))
+    packer.add_bin(Bin(f'BIN 4', round(random.uniform(150, 200), 3), round(random.uniform(150, 200), 3), round(random.uniform(150, 200), 3), round(random.uniform(150, 200), 3)))
+    packer.add_bin(Bin(f'BIN 5', round(random.uniform(200, 250), 3), round(random.uniform(200, 250), 3), round(random.uniform(200, 250), 3), round(random.uniform(200, 250), 3)))
     
 
     # ADDING ITEMS TO BE PACKER:
     for i in range(item):
-        packer.add_item(Item(f'ITEM {i}', round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3), round(random.uniform(0, 50), 3), round(random.uniform(0, 20), 3)))
+        packer.add_item(Item(f'ITEM {i}', round(random.uniform(25, 100), 3), round(random.uniform(25, 100), 3), round(random.uniform(25, 100), 3), round(random.uniform(0, 20), 3)))
         
     for bin in packer.bins:
         RandomBins.append(bin)
@@ -74,8 +77,8 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
     for item in RanItemList:
         packer.add_item(item)
 
-for j in range(100):
-    for i in range(1000):
+for j in range(10):
+    for i in range(10):
             
         RandomBins = []
 
@@ -88,22 +91,28 @@ for j in range(100):
         Results_small = []
 
         add_random(RandomBins, RandomItems)
+        
+        print("\n PACK ALL PIVOTING: \n")
 
         packer.pack_all_items(Results_erick_dube)
 
-        clear_packer(packer)
-
-        insert_same_random_into_packer(RandomBins, RandomItems)
-
-        packer.pack_all_items_random(Results_random)
-        
-        clear_packer(packer)   
+        clear_packer(packer) 
         
         insert_same_random_into_packer(RandomBins, RandomItems)
+        
+        print("\n PACK ALL SMALL: \n")
 
         packer.pack_all_items_small(Results_random)
         
         clear_packer(packer)
+        
+        insert_same_random_into_packer(RandomBins, RandomItems)
+        
+        print("\n PACK ALL RANDOM: \n")
+
+        packer.pack_all_items_random(Results_random)
+        
+        clear_packer(packer)  
          
 # CALLING PACK_ALL_ITEMS FUNCTION ON THE GIVEN ITEMS AND BINS GIVEN:
 

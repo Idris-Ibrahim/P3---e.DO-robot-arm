@@ -1,5 +1,6 @@
 from main import Packer, Bin, Item
 import random
+
 # IMPORTING THE PACKER OBJECT
 packer = Packer()
 

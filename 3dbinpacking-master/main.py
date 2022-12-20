@@ -764,6 +764,7 @@ class Packer:
                             self.bins[i].unfitted_items.clear()
                             
                             continue
+                        
                     else:
                         print("ERROR")
                         exit()

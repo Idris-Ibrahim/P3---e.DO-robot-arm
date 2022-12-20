@@ -8,7 +8,7 @@ parameters = cv2.aruco.DetectorParameters_create()
 aruco_dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_5X5_50)
 
 # Calibrate camera
-calib_data_path = "D:/3/P3/P3-e.DO-robot-arm/MultiMatrix.npz"
+calib_data_path = "MultiMatrix.npz"
 calib_data = np.load(calib_data_path)
 print(calib_data.files)
 cam_mat = calib_data["camMatrix"]
@@ -26,12 +26,19 @@ Length = []
 Height = []
 
 # Load Cap
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(2)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 400)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
 counter = 0
 
-while True:
+object_width = float(0)
+        
+object_length = float(0)
+
+avg10 = []
+avg11 = []
+
+while counter <= 20:
     _, img = cap.read()
     counter += 1
     # Get Aruco marker
@@ -45,10 +52,10 @@ while True:
         aruco_perimeter = cv2.arcLength(corners[0], True)
 
         # Pixel to cm ratio
-        pixel_cm_ratio = aruco_perimeter / 20
+        pixel_cm_ratio = aruco_perimeter / 10
 
         contours = detector.detect_objects(img)
-
+        
         # Draw objects boundaries
         for cnt in contours:
             # Get rect
@@ -68,22 +75,28 @@ while True:
             cv2.putText(img, "Width {} cm".format(round(object_width, 1)), (int(x - 100), int(y - 20)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
             cv2.putText(img, "Length {} cm".format(round(object_length, 1)), (int(x - 100), int(y + 15)), cv2.FONT_HERSHEY_PLAIN, 2, (100, 200, 0), 2)
             
-            Width.append(object_width)
-            Length.append(object_length)
+            if object_width > 7:
+                Width.append(object_width)
+            if object_length > 7:
+                Length.append(object_length)
 
-        #print("Width: ", object_width, "Length: ", object_length) 
+        #print("Width: ", object_width, "Length: ", object_length)
+         
+    if cv2.waitKey(27) & 0xFF == ord("q"):
+        break
 
         
 
     if counter >= 75:
         break
-
-while True:
+counter = 0
+while counter <= 20:
+    counter += 1
     ret, frame = cap.read()
     if not ret:
         break  
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    marker_corners, marker_IDs, reject = cv2.aruco.detectMarkers(gray_frame, aruco_dict, parameters=parameters, marker_ids = 10 )
+    marker_corners, marker_IDs, reject = cv2.aruco.detectMarkers(gray_frame, aruco_dict, parameters=parameters)
     if marker_corners:
         rVec, tVec, _ = aruco.estimatePoseSingleMarkers(marker_corners, MARKER_SIZE, cam_mat, dist_coef)
         total_markers = range(0, marker_IDs.size)
@@ -113,19 +126,17 @@ while True:
                 #print(ids, distance)
                 alld10.append(distance)
                 #print(alld10)
-                avg10 = sum(alld10) / len(alld10)
                 #print("avarage distance for id 10 is: ", round(avg10,2))
         
             if (ids == [11]):
                 #print(ids, distance)
                 alld11.append(distance)
                 #print(alld11)
-                avg11 = sum(alld11) / len(alld11)
                 #print("avarage distance for id 11 is: ", round(avg11,2))
-            
-                
-                #print("Endleig højde", hight)
-                
+        
+        avg10 = sum(alld10) / len(alld10)   
+        avg11 = sum(alld11) / len(alld11)   
+          
         Width.append(object_width)
         Length.append(object_length)
         final_width = sum(Width) / len(Width)
@@ -141,3 +152,14 @@ while True:
         break    
 cap.release()
 cv2.destroyAllWindows()
+
+WidthAvg = sum(Width)/len(Width)
+LengthAvg = sum(Length)/len(Length)
+
+
+Measurement = [WidthAvg, LengthAvg, Hight]
+
+# open a file for writing
+with open('Measurement.txt', 'a') as f:
+    # write each number to the file, followed by a newline character
+    f.write(str(Measurement) + '\n')  

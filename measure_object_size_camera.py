@@ -160,7 +160,7 @@ LengthAvg = sum(Length)/len(Length)
 Measurement = [WidthAvg, LengthAvg, Hight]
 
 # open a file for writing
-with open('3dbinpacking-master/Measurement.txt', 'a') as f:
+with open('3dbinpacking-master/Measurements.txt', 'a') as f:
     # write each number to the file, followed by a newline character
     f.write(str(Measurement[0]) + ',')
     f.write(str(Measurement[1]) + ',')

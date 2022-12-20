@@ -83,7 +83,7 @@ while True:
     if not ret:
         break  
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    marker_corners, marker_IDs, reject = cv2.aruco.detectMarkers(gray_frame, aruco_dict, parameters=parameters)
+    marker_corners, marker_IDs, reject = cv2.aruco.detectMarkers(gray_frame, aruco_dict, parameters=parameters, marker_ids = 10 )
     if marker_corners:
         rVec, tVec, _ = aruco.estimatePoseSingleMarkers(marker_corners, MARKER_SIZE, cam_mat, dist_coef)
         total_markers = range(0, marker_IDs.size)

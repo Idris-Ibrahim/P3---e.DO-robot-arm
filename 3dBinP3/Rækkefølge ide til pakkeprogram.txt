@@ -1,8 +1,0 @@
-tager box dimentioner (x, y, z) og tester for item dimentioner (x, y, z)
-
-Hvis enten x, y eller z i item overskrider boxens relative dimenstion (x, y, z), skiftes dimentionerne så den passer.
-Hvis alle x, y eller z i item overskrider boxens relative dimenstion (x, y, z), forøges boxens størrelse
-
-sætter item i box = trækker (x, y, z) af item fra box (x, y, z).
-
-tester om der kan være flere ved udregningen:

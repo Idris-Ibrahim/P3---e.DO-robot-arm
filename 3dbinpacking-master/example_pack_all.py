@@ -62,7 +62,7 @@ def add_random(RandomBins, RandomItems):
 
     # ADDING ITEMS TO BE PACKER:
     for i in range(item):
-        packer.add_item(Item(f'ITEM {i}', round(random.uniform(25, 100), 3), round(random.uniform(25, 100), 3), round(random.uniform(25, 100), 3), round(random.uniform(0, 20), 3)))
+        packer.add_item(Item(f'ITEM {i}', round(random.uniform(25, 100), 3), round(random.uniform(25, 100), 3), round(random.uniform(25, 100), 3), round(random.uniform(0, 5), 3)))
         
     for bin in packer.bins:
         RandomBins.append(bin)
@@ -78,7 +78,7 @@ def insert_same_random_into_packer(RanBinList = [], RanItemList =[]):
     for item in RanItemList:
         packer.add_item(item)
 
-for j in range(10):
+for j in range(100):
     for i in range(10):
             
         RandomBins = []

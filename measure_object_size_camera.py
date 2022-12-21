@@ -26,9 +26,9 @@ Length = []
 Height = []
 
 # Load Cap
-cap = cv2.VideoCapture(2)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 400)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 counter = 0
 
 object_width = float(0)

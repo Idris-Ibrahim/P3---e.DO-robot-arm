@@ -24,8 +24,8 @@ alld11 =[]
 
 # Load Cap
 cap = cv2.VideoCapture(1)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 400)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 400)
 counter = 0
 
 while True:
@@ -100,6 +100,7 @@ while True:
             
             # Draw the pose of the marker
             cv2.putText(frame,f"id: {ids[0]} Dist: {round(distance, 2)}",top_right,cv2.FONT_HERSHEY_PLAIN,1.3,(0, 0, 255),2,cv2.LINE_AA,)
+            
             
             if (ids == [10]):
                 #print(ids, distance)
